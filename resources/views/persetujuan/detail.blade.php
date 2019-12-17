@@ -1,0 +1,168 @@
+@extends('layouts.master')
+
+@section('title', 'Detail Barang')
+
+@section('content')
+
+<!-- MAIN -->
+<div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">FORM PERSETUJUAN BARANG</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/persetujuan/proses/{{$pengajuan->id}}" method="post">
+                            {{csrf_field()}}
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">NAMA PENGAJU</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="nama_pengajuan" value="{{$pengajuan->nama_pengajuan}}" disabled>
+                                </div>
+                            </div>                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">UNIT</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="unit" disabled>
+                                        <option >Pilih Unit</option>
+                                        <option value="STT NF" @if($pengajuan->unit == "STT NF") selected @endif>STT NF</option>
+                                        <option value="NF Komputer" @if($pengajuan->unit == "NF Komputer") selected @endif>NF KOMPUTER</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">WAKET&SATKER</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="waket_satker" disabled>
+                                        <option selected>Pilih Satuan Kerja</option>
+                                        <option value="WAKET 1 (BAAK)" @if($pengajuan->waket_satker == "WAKET 1 (BAAK)") selected @endif>WAKET 1 (BAAK)</option>
+                                        <option value="WAKET 1 (LLC)" @if($pengajuan->waket_satker == "WAKET 1 (LLC)") selected @endif>WAKET 1 (LLC)</option>
+                                        <option value="WAKET 1 (LPMI)" @if($pengajuan->waket_satker == "WAKET 1 (LPMI)") selected @endif>WAKET 1 (LPMI)</option>
+                                        <option value="WAKET 1 (LPPMI)" @if($pengajuan->waket_satker == "WAKET 1 (LPPMI)") selected @endif>WAKET 1 (LPPMI)</option>
+                                        <option value="WAKET 1 (PRODI)" @if($pengajuan->waket_satker == "WAKET 1 (PRODI)") selected @endif>WAKET 1 (PRODI)</option>
+                                        <option value="WAKET 1 (UPT KOMPUTER)" @if($pengajuan->waket_satker == "WAKET 1 (UPT KOMPUTER)") selected @endif>WAKET 1 (UPT KOMPUTER)</option>
+                                        <option value="WAKET 2 (BSP)" @if($pengajuan->waket_satker == "WAKET 2 (BSP)") selected @endif>WAKET 2 (BSP)</option>
+                                        <option value="WAKET 2 (KEUANGAN)" @if($pengajuan->waket_satker == "WAKET 2 (KEUANGAN)") selected @endif>WAKET 2 (KEUANGAN)</option>
+                                        <option value="WAKET 2 (SDM)" @if($pengajuan->waket_satker == "WAKET 2 (SDM)") selected @endif>WAKET 2 (SDM)</option>
+                                        <option value="WAKET 3" @if($pengajuan->waket_satker == "WAKET 3") selected @endif>WAKET 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">PERIHAL</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="perihal" disabled>
+                                        <option selected>Pilih Perihal</option>
+                                        <option value="ATK (Alat Tulis Kantor)" @if($pengajuan->perihal == "ATK (Alat Tulis Kantor)") selected @endif>ATK (Alat Tulis Kantor)</option>
+                                        <option value="Hardware" @if($pengajuan->perihal == "Hardware") selected @endif>Hardware</option>
+                                        <option value="Pencetakan" @if($pengajuan->perihal == "Pencetakan") selected @endif>Pencetakan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">TANGGAL</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group date" data-provide="datapicker">
+                                        <input type="text" class="form-control datepicker" name="tanggal" value="{{$pengajuan->tanggal}}" readonly>
+                                        <div class="input-group-addon">
+                                            <span class="lnr lnr-calendar-full"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">LIST BARANG</label>
+                                <div class="col-sm-10">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="bg-info">
+                                                <tr>
+                                                    <th>Nama Barang</th>
+                                                    <th>Link & Gambar</th>
+                                                    <th>Quantity</th>
+                                                    <th>Harga Satuan</th>
+                                                    <th>Jumlah</th>
+                                                    <th>Setujui</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($barangs as $barang): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" name="nama_barang[]" value="{{$barang->nama_barang}}" readonly>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" name="link_gambar[]" value="{{$barang->link_gambar}}" readonly>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" id="quantity" name="quantity[]" value="{{$barang->quantity}}" readonly>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-10">
+                                                                <input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" value="{{$barang->harga_satuan}}" readonly>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-10">
+                                                                <input type="number" class="form-control" name="jumlah[]" value="{{$barang->jumlah}}" readonly>
+                                                            </div>
+                                                        </td>
+                                                        <td colspan="2">
+                                                            <div class="custom-control form-control-lg custom-checkbox">
+                                                                <input class="form-check-input" type="checkbox" name="status[]" value="Disetujui"> Ya
+                                                            </div>
+                                                            <div class="custom-control form-control-lg custom-checkbox">
+                                                                <input type="checkbox" class="form-check-input" name="status[]" value="Tidak Disetujui"> Tidak
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach ?>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="4" class="text-right"><b>Total</b></td>
+                                                    <td>
+                                                        <div class="col-10">
+                                                            <input type="number" name="total_harga" class="form-control" value="{{$pengajuan->total_harga}}" readonly>
+                                                        </div>
+                                                        <td style="display: none;">
+                                                        </td>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">CATATAN</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" name="catatan"></textarea>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Kirim Form</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+</div>
+<!-- END MAIN -->
+@endsection

@@ -1,0 +1,12 @@
+
+/* Google Material icons */
+@import "http://fonts.googleapis.com/icon?family=Material+Icons";
+
+/* Propeller css */
+@import "dist/css/propeller.min.css";
+
+/* Bootstrap datetimepicker */
+@import "datetimepicker/css/bootstrap-datetimepicker.css";
+
+/* Propeller datetimepicker */
+@import "datetimepicker/css/pmd-datetimepicker.css";
