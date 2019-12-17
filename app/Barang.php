@@ -13,9 +13,4 @@ class Barang extends Model
     {
     	return $this->belongsTo(Pengajuan::class);
     }
-
-    function test()
-    {
-    	echo 'Test';
-    }
 }
