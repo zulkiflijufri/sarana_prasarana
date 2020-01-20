@@ -105,7 +105,7 @@
 													</td>
 													<td>
 														<div class="col-10" required>
-															<input type="text" class="form-control" id="quantity"name="quantity[]" required autocomplete="off">
+															<input type="text" class="form-control" id="quantity" name="quantity[]" required autocomplete="off">
 														</div>
 													</td>
 													<td>
@@ -128,7 +128,7 @@
 													<td colspan="4" class="text-right"><b>Total</b></td>
 													<td>
 														<div class="col-10">
-															<input type="number" class="form-control" id="total_harga" name="total_harga" required>
+															<input type="number" class="form-control" id="total_harga" name="total_harga" autocomplete="off" required>
 														</div>
 													</td>
 													<td style="display: none;">
