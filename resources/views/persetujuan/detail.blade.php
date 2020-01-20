@@ -118,12 +118,12 @@
                                                             </div>
                                                         </td>
                                                         <td colspan="2">
-                                                            <div class="custom-control form-control-lg custom-checkbox">
-                                                                <input class="form-check-input" type="checkbox" name="status[]" value="Disetujui"> Ya
-                                                            </div>
-                                                            <div class="custom-control form-control-lg custom-checkbox">
-                                                                <input type="checkbox" class="form-check-input" name="status[]" value="Tidak Disetujui"> Tidak
-                                                            </div>
+                                                                <div class="col-10">
+                                                                    <select name="status[]" class="form-inline">
+                                                                        <option value="Ya">Ya</option>
+                                                                        <option value="Tidak">Tidak</option>
+                                                                    </select>
+                                                                </div>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach ?>
