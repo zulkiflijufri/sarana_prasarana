@@ -15,7 +15,7 @@
 // 	return view('welcome');
 // });
 
-Route::get('/', 'AuthController@login')->name('login');
+Route::get('/', 'AuthController@login')->name('login')->middleware('guest');
 //Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/postlogin', 'AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
