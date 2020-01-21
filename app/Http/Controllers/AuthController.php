@@ -19,6 +19,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
+        // jika berhasil login
         if(Auth::attempt($request->only('email', 'password'))) {
             return redirect ('/dasboard');
         }
