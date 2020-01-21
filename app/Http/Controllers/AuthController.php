@@ -23,7 +23,7 @@ class AuthController extends Controller
             return redirect ('/dasboard');
         }
 
-        return redirect('/');
+        return redirect('/')->with('gagal', 'Email atau Password belum terdaftar');
     }
 
     public function logout() {

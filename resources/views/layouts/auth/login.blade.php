@@ -33,16 +33,21 @@
 							</div>
 							<form class="form-auth-small" action="/postlogin" method="post">
 								{{csrf_field()}}
+
+								@if(session('gagal'))
+									<span class="text-danger">{{session('gagal')}}</span>
+									<br><br>
+								@endif
 								<div class="form-group {{$errors->has('email') ? 'has-error' : ''}}">
 									<input type="email" name="email" class="form-control" id="signin-email" placeholder="Email" value="{{old('email')}}" autofocus autocomplete="off">
 									@if($errors->has('email'))
-									<span class="help-block">{{$errors->first('email')}}</span>
+										<span class="text-danger">{{$errors->first('email')}}</span>
 									@endif
 								</div>
 								<div class="form-group {{$errors->has('password') ? 'has-error' : ''}}">
 									<input type="password" name="password" class="form-control" id="signin-password" placeholder="Password" autocomplete="off">
 									@if($errors->has('password'))
-									<span class="help-block">{{$errors->first('password')}}</span>
+										<span class="text-danger">{{$errors->first('password')}}</span>
 									@endif
 								</div>
 								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
