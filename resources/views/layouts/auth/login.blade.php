@@ -57,7 +57,7 @@
 					<div class="right">
 						<div class="overlay"></div>
 						<div class="content text">
-							<h1 class="heading">Form Pengajuan Barang Bagian Sarana Dan Prasana STT-NF</h1>
+							<h1 class="heading">Form Pengajuan Barang Bagian Sarana Dan Prasarana STT-NF</h1>
 						</div>
 					</div>
 					<div class="clearfix"></div>
