@@ -120,6 +120,7 @@
                                                         <td colspan="2">
                                                                 <div class="col-10">
                                                                     <select name="status[]" class="form-inline">
+                                                                        <option value="null" selected hidden>TTD</option>
                                                                         <option value="Ya">Ya</option>
                                                                         <option value="Tidak">Tidak</option>
                                                                     </select>
