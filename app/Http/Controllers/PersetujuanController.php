@@ -17,7 +17,7 @@ class PersetujuanController extends Controller
     public function detail($id) {
         $pengajuan = Pengajuan::find($id);
         $barangs = Barang::where('pengajuan_id', $id)->get();
-        return view ('persetujuan.detail', ['pengajuan' => $pengajuan], compact('barangs'));
+        return view ('persetujuan.detail', compact('barangs','pengajuan'));
     }
 
     public function delete($id) {
@@ -28,17 +28,8 @@ class PersetujuanController extends Controller
 
     public function proses(Request $request ,$id)
     {
-        /**
-        * Memiliki value yg sama
-        *
-        * $status = $request->status;
-        * $jumlah_status = count($status);
-        * for ($i=0; $i < $jumlah_status; $i++) {
-        *    Barang::where('pengajuan_id', $id)->insert([
-        *        'status' => $status[$i]
-        *    ]);
-        *}
-        */
+        $barang = $request->status;
+        //dd($barang['0']);
 
         $catatan = $request->catatan;
         Pengajuan::where('id', $id)->update([
