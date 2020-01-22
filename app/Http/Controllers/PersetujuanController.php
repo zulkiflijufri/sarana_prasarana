@@ -27,9 +27,14 @@ class PersetujuanController extends Controller
     }
 
     public function proses(Request $request ,$id)
-    {
-        $barang = $request->status;
-        //dd($barang['0']);
+    {   
+        $status = $request->status;
+        $nama_barang = $request->nama_barang;
+        for ($i = 0; $i < count($status); $i++) {
+            Barang::where('nama_barang', $nama_barang[$i])->update([
+                'status' => $status[$i]
+            ]);   
+        }
 
         $catatan = $request->catatan;
         Pengajuan::where('id', $id)->update([
