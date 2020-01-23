@@ -9,8 +9,13 @@ use PDF;
 
 class PersetujuanController extends Controller
 {
-    public function index() {
-        $pengajuans = Pengajuan::orderBy('id', 'DESC')->paginate(5);
+    public function index(Request $request) {
+        if ($request->has('cari')) {
+            $pengajuans = Pengajuan::where('nama_pengajuan', 'LIKE', '%'.$request->cari.'%')
+                          ->orderBy('id','DESC')->paginate(5);
+        } else {
+            $pengajuans = Pengajuan::orderBy('id', 'DESC')->paginate(5);    
+        }
         return view ('persetujuan.index', ['pengajuans' => $pengajuans]);
     }
 
@@ -44,9 +49,14 @@ class PersetujuanController extends Controller
         return redirect('/persetujuan')->with('proses', 'Pengajuan Berhasil Di Proses');
     }
 
-    public function history()
+    public function history(Request $request)
     {
-        $pengajuans = Pengajuan::orderBy('id', 'DESC')->paginate(8);
+        if ($request->has('cari')) {
+            $pengajuans = Pengajuan::where('perihal', 'LIKE', '%'.$request->cari.'%')
+                          ->orderBy('id','DESC')->paginate(8);
+        } else {
+            $pengajuans = Pengajuan::orderBy('id', 'DESC')->paginate(8);
+        }
         return view ('persetujuan.history', ['pengajuans' => $pengajuans]);
     }
 
