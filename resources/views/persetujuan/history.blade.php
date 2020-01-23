@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Persetujuan Barang')
+@section('title', 'History Barang')
 
 @section('content')
 
@@ -25,18 +25,18 @@
             </thead>
             <tbody>
               @forelse($pengajuans as $pengajuan)
-              <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{$pengajuan->perihal}}</td>
-                <td>{{$pengajuan->unit}}</td>
-                <td>{{$pengajuan->waket_satker}}</td>
-                <td>{{$pengajuan->tanggal}}</td>
-                <td><a href="pdf_persetujuan/{{$pengajuan->id}}"><span class="lnr lnr-cloud-download"></span></a></td>
-              </tr>
+	              <tr>
+	                <td>{{$loop->iteration}}</td>
+	                <td>{{$pengajuan->perihal}}</td>
+	                <td>{{$pengajuan->unit}}</td>
+	                <td>{{$pengajuan->waket_satker}}</td>
+	                <td>{{$pengajuan->tanggal}}</td>
+	                <td><a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a></td>
+	              </tr>
               @empty
-              <tr>
-                <td colspan="6" align="center"><i> - History pengajuan masih kosong -</i></td>
-              </tr>
+	              <tr>
+	                <td colspan="6" align="center"><i> - History pengajuan masih kosong -</i></td>
+	              </tr>
               @endforelse
             </tbody>
           </table>
