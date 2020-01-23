@@ -182,13 +182,6 @@
 			});
 		});
 
-		// function sum() {
-		// 	var quantity = $("#quantity").val();
-		// 	var harga_satuan = $("#harga_satuan").val();
-		// 	jumlah = quantity * harga_satuan;
-		// 	$("#jumlah").val(jumlah);
-		// }
-
 		//operasi perhitungan
 		$('tbody').keyup(function(){
 			var bil1 = parseInt($('#quantity').val());
@@ -218,7 +211,7 @@
 			'<td>'+
 			'<div class="col-10">'+
 			'<input type="text" class="form-control" id="quantity" name="quantity[]" autocomplete="off" required>'+
-			'</div>'+ 
+			'</div>'+
 			'</td>'+
 			'<td>'+
 			'<div class="col-10">'+
