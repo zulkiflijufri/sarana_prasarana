@@ -24,20 +24,20 @@
         </thead>
         <tbody>
           @forelse($pengajuans as $pengajuan)
-          <tr>
-            <td>{{$loop->iteration}}</td>
-            <td>{{$pengajuan->nama_pengajuan}} <p class="text-muted" style="font-size: 12px; margin-top: 3px; margin-bottom: 2px;">{{$pengajuan->created_at->diffForHumans()}}</p></td>
-            <td>{{$pengajuan->unit}}</td>
-            <td>{{$pengajuan->waket_satker}}</td>
-            <td><a href="/persetujuan/detail/{{$pengajuan->id}}"><span class="lnr lnr-eye"></span></a>
-                &nbsp;
-                <a href="#"><span class="lnr lnr-trash delete" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}"></span></a>
-            </td>
-          </tr>
+            <tr>
+              <td>{{$loop->iteration}}</td>
+              <td>{{$pengajuan->nama_pengajuan}} <p class="text-muted" style="font-size: 12px; margin-top: 3px; margin-bottom: 2px;">{{$pengajuan->created_at->diffForHumans()}}</p></td>
+              <td>{{$pengajuan->unit}}</td>
+              <td>{{$pengajuan->waket_satker}}</td>
+              <td><a href="/persetujuan/detail/{{$pengajuan->id}}" title="Lihat"><span class="lnr lnr-eye"></span></a>
+                  &nbsp;
+                  <a href="#"><span class="lnr lnr-trash delete" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus"></span></a>
+              </td>
+            </tr>
           @empty
-          <tr>
-            <td colspan="5" align="center"><i>- Data pengajuan masih kosong -</i></td>
-          </tr>
+            <tr>
+              <td colspan="5" align="center"><i>- Data pengajuan masih kosong -</i></td>
+            </tr>
           @endforelse
         </tbody>
       </table>
@@ -53,15 +53,14 @@
 
 <script type="text/javascript">
   @if(session('proses'))
-  toastr.info('{{session('proses')}}')
+    toastr.info('{{session('proses')}}')
   @elseif(session('hapus'))
-  toastr.warning('{{session('hapus')}}')
+    toastr.warning('{{session('hapus')}}')
   @endif
 
   $('.delete').click(function(){
     var id_pengajuan = $(this).attr('id_pengajuan');
     var nama_pengajuan = $(this).attr('nama_pengajuan');
-    console.log(nama_pengajuan);
     swal({
       title: "Anda Yakin?",
       text: "Ingin menghapus pengajuan barang dari "+nama_pengajuan+" ??",
