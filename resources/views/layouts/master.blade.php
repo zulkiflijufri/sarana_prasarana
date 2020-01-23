@@ -47,7 +47,7 @@
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">&copy; <?php echo date('Y'); ?> <a href="https://www.nurulfikri.ac.id" target="_blank">STT Terpadu Nurul Fikri</a>. All Rights Reserved.</p>
+				<p class="copyright">&copy; <?php echo '2019 - '.date('Y'); ?> <a href="https://www.nurulfikri.ac.id" target="_blank">STT Terpadu Nurul Fikri</a>. All Rights Reserved.</p>
 			</div>
 		</footer>
 	</div>
