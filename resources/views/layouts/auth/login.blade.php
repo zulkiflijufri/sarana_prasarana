@@ -35,8 +35,10 @@
 								{{csrf_field()}}
 
 								@if(session('gagal'))
-									<span class="text-danger">{{session('gagal')}}</span>
-									<br><br>
+									<div class="alert alert-danger alert-dismissible" role="alert">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<i class="fa fa-times-circle"></i> Email atau Password salah
+									</div>
 								@endif
 								<div class="form-group {{$errors->has('email') ? 'has-error' : ''}}">
 									<input type="email" name="email" class="form-control" id="signin-email" placeholder="Email" value="{{old('email')}}" autofocus autocomplete="off">
@@ -66,5 +68,7 @@
 		</div>
 	</div>
 	<!-- END WRAPPER -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
