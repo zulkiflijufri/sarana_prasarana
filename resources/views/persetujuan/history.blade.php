@@ -19,7 +19,7 @@
                 <th>PERIHAL PENGAJUAN</th>
                 <th>UNIT</th>
                 <th>WAKET & SATKER</th>
-                <th>TANGGAL</th>
+                <th>TANGGAL PENGAJUAN</th>
                 <th></th>
               </tr>
             </thead>
