@@ -35,4 +35,3 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,atasan']], function() {
 	Route::post('/persetujuan/proses/{id}', 'PersetujuanController@proses');
 	Route::get('/persetujuan/delete/{id}', 'PersetujuanController@delete');
 });
-
