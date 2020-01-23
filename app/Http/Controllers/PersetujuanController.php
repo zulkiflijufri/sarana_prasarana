@@ -19,7 +19,7 @@ class PersetujuanController extends Controller
         return view ('persetujuan.index', ['pengajuans' => $pengajuans]);
     }
 
-    public function detail($id) {
+    public function detail(Request $request, $id) {
         $pengajuan = Pengajuan::findOrFail($id);
         $barangs = Barang::where('pengajuan_id', $id)->get();
         return view ('persetujuan.detail', compact('barangs','pengajuan'));
@@ -63,7 +63,7 @@ class PersetujuanController extends Controller
     public function pdf_persetujuan($id)
     {
         $pengajuan = Pengajuan::findOrFail($id);
-        $barangs = Barang::where('pengajuan_id', $id)->get();
+        $barangs = Barang::where('pengajuan_id', $id)->whereIn('status', ['Ya'])->get();
         $pdf = PDF::loadview('persetujuan.pdf_persetujuan', ['pengajuan' => $pengajuan], compact('barangs'));
         return $pdf->stream('Pengajuan Barang_'.$pengajuan->nama_pengajuan.'.pdf');
     }
