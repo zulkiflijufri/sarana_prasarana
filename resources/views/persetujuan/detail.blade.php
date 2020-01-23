@@ -104,7 +104,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
-                                                                <input type="text" class="form-control" id="quantity" name="quantity[]" value="{{$barang->quantity}}" readonly>
+                                                                <input type="number" class="form-control" id="quantity" name="quantity[]" value="{{$barang->quantity}}" readonly>
                                                             </div>
                                                         </td>
                                                         <td>
