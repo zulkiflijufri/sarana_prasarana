@@ -20,7 +20,7 @@
 			<tr>
 				<th align="center">No</th>
 				<th align="center" colspan="6">Keterangan</th>
-				<th align="center" colspan="3">Satuan</th>
+				<th align="center" colspan="3">Harga Satuan</th>
 				<th align="center" colspan="3">Jumlah</th>
 			</tr>
 		</thead>
@@ -40,7 +40,7 @@
 		</tbody>
 	</table>
 	<br><br><br><br><br><br><br><br>
-	<p align="justify">Catatan: {{$barang->pengajuan->catatan}}</p>
+	<p align="justify">Catatan: {{$pengajuan->catatan}}</p>
 	<table style="border-collapse:collapse; margin-left: none" border="1" cellpadding="2" cellspacing="2" align="center" width="100%">
 		<tr>
 			<td>Tgl. Diterima:</td>
