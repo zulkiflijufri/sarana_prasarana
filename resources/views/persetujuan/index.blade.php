@@ -29,9 +29,9 @@
               <td>{{$pengajuan->nama_pengajuan}} <p class="text-muted" style="font-size: 12px; margin-top: 3px; margin-bottom: 2px;">{{$pengajuan->created_at->diffForHumans()}}</p></td>
               <td>{{$pengajuan->unit}}</td>
               <td>{{$pengajuan->waket_satker}}</td>
-              <td><a href="/persetujuan/detail/{{$pengajuan->id}}" title="Lihat"><span class="lnr lnr-eye"></span></a>
-                  &nbsp;
-                  <a href="#"><span class="lnr lnr-trash delete" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus"></span></a>
+              <td>
+                <a href="/persetujuan/detail/{{$pengajuan->id}}" title="Lihat"><span class="lnr lnr-eye"></span></a>&nbsp;
+                <a href="#"><span class="lnr lnr-trash hapus" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus"></span></a>
               </td>
             </tr>
           @empty
@@ -58,9 +58,10 @@
     toastr.warning('{{session('hapus')}}')
   @endif
 
-  $('.delete').click(function(){
+  $('.hapus').click(function(){
     var id_pengajuan = $(this).attr('id_pengajuan');
     var nama_pengajuan = $(this).attr('nama_pengajuan');
+    
     swal({
       title: "Anda Yakin?",
       text: "Ingin menghapus pengajuan barang dari "+nama_pengajuan+" ??",
