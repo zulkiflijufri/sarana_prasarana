@@ -28,7 +28,7 @@
 			<?php foreach ($barangs as $key=>$barang): ?>
 				<tr>
 					<td align="center">{{++$key}}.</td>
-					<td align="center" colspan="6">{{$barang->nama_barang}} {{$barang->quantity}} </td>
+					<td align="center" colspan="6">{{$barang->nama_barang}} , {{$barang->quantity}} </td>
 					<td align="center" colspan="3">Rp. {{$barang->harga_satuan}}</td>
 					<td align="center" colspan="3">Rp. {{$barang->jumlah}}</td>
 				</tr>
