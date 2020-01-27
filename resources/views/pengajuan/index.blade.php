@@ -86,6 +86,7 @@
 													<th>Nama Barang</th>
 													<th>Link & Gambar</th>
 													<th>Quantity</th>
+													<th>Satuan Barang</th>
 													<th>Harga Satuan</th>
 													<th>Jumlah</th>
 													<th></th>
@@ -105,7 +106,12 @@
 													</td>
 													<td>
 														<div class="col-10" required>
-															<input type="text" class="form-control" id="quantity" name="quantity[]" required autocomplete="off">
+															<input type="number" class="form-control" id="quantity" name="quantity[]" required autocomplete="off">
+														</div>
+													</td>
+													<td>
+														<div class="col-10">
+															<input type="text" class="form-control" name="satuan_barang[]" required autocomplete="off">
 														</div>
 													</td>
 													<td>
@@ -125,7 +131,7 @@
 											</tbody>
 											<tfoot>
 												<tr>
-													<td colspan="4" class="text-right"><b>Total</b></td>
+													<td colspan="5" class="text-right"><b>Total</b></td>
 													<td>
 														<div class="col-10">
 															<input type="number" class="form-control" id="total_harga" name="total_harga" autocomplete="off" required>
@@ -210,7 +216,12 @@
 			'</td>'+
 			'<td>'+
 			'<div class="col-10">'+
-			'<input type="text" class="form-control" id="quantity" name="quantity[]" autocomplete="off" required>'+
+			'<input type="number" class="form-control" id="quantity" name="quantity[]" autocomplete="off" required>'+
+			'</div>'+
+			'</td>'+
+			'<td>'+
+			'<div class="col-10">'+
+			'<input type="text" class="form-control" name="satuan_barang[]" autocomplete="off" required>'+
 			'</div>'+
 			'</td>'+
 			'<td>'+
