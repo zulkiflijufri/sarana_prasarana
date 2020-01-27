@@ -18,9 +18,10 @@ class CreateBarangTable extends Migration
             $table->string('nama_barang', 100);
             $table->string('link_gambar', 100)->nullable();
             $table->integer('quantity');
+            $table->string('satuan_barang', 20);
             $table->integer('harga_satuan');
             $table->integer('jumlah');
-            $table->string('status', 20);
+            $table->string('status', 20)->nullable();
             $table->integer('pengajuan_id')->unsigned();
             $table->timestamps();
             $table->foreign('pengajuan_id')->references('id')->on('pengajuan')->onDelete('cascade');
