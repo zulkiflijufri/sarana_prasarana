@@ -20,26 +20,42 @@
 			<tr>
 				<th align="center">No</th>
 				<th align="center" colspan="6">Keterangan</th>
-				<th align="center" colspan="3">Harga Satuan</th>
-				<th align="center" colspan="3">Jumlah</th>
+				<th align="center" colspan="4">Qty</th>
+				<th align="center" colspan="4">Satuan Barang</th>
+				<th align="center" colspan="4">Harga Satuan</th>
+				<th align="center" colspan="4">Jumlah</th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($barangs as $key=>$barang): ?>
-				<tr>
-					<td align="center">{{++$key}}.</td>
-					<td align="center" colspan="6">{{$barang->nama_barang}} , {{$barang->quantity}} </td>
-					<td align="center" colspan="3">Rp. {{$barang->harga_satuan}}</td>
-					<td align="center" colspan="3">Rp. {{$barang->jumlah}}</td>
-				</tr>
+			<?php $no=1; ?>
+			<?php foreach ($barangs as $key => $barang) : ?>
+				@if($barang->status == '')
+					<tr>
+						<td align="center">{{++$key}}.</td>
+						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+						<td align="center" colspan="4">{{$barang->quantity}}</td>
+						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+						<td align="center" colspan="4">Rp. {{$barang->harga_satuan}}</td>
+						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
+					</tr>
+				@elseif($barang->status == 'Ya')
+					<tr>
+						<td align="center">{{$no++}}.</td>
+						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+						<td align="center" colspan="4">{{$barang->quantity}}</td>
+						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+						<td align="center" colspan="4">Rp. {{$barang->harga_satuan}}</td>
+						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
+					</tr>
+				@endif
 			<?php endforeach ?>
 			<tr>
-				<td colspan="10" align="right"><b>Total</b></td>
-				<td colspan="3" align="center"><b>Rp. {{$pengajuan->total_harga}}</b></td>
+				<td colspan="19" align="right"><b>Total</b></td>
+				<td colspan="4" align="center"><b>Rp. {{$pengajuan->total_harga}}</b></td>
 			</tr>
 		</tbody>
 	</table>
-	<br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<p align="justify">Catatan: {{$pengajuan->catatan}}</p>
 	<table style="border-collapse:collapse; margin-left: none" border="1" cellpadding="2" cellspacing="2" align="center" width="100%">
 		<tr>
@@ -51,19 +67,37 @@
 		</tr>
 		<tr>
 			<td align="center">Kasir</td>
-			<td align="center">Yayasan</td>
-			<td align="center">Biro</td>
 			<td align="center">Kepala Unit</td>
+			<td align="center">Biro</td>
+			<td align="center">Yayasan</td>
 			<td align="center">Waket</td>
 		</tr>
 		<tr>
 			<td rowspan="11"></td>
-			<td rowspan="11"><img src="../public/admin/assets/img/ttd_yayasan.jpg" width="80" height="50" style="margin-left: 30px; margin-bottom: 10px"></td>
-			<td rowspan="11"><img src="../public/admin/assets/img/ttd_biro.jpg" width="80" height="50" style="margin-left: 30px; margin-bottom: 10px"></td>
 			<td rowspan="11"></td>
+			<td rowspan="11">
+				@if($jml_status != 0)
+					<img src="../public/admin/assets/img/ttd_biro.jpg" width="80" height="50" style="margin-left: 30px; margin-bottom: 10px">
+				@endif
+			</td>
+			<td rowspan="11">
+				@if($jml_status != 0)
+					<img src="../public/admin/assets/img/ttd_yayasan.jpg" width="80" height="50" style="margin-left: 30px;margin-bottom: 10px">
+				@endif
+			</td>
 			<td rowspan="11"></td>
 		</tr>
-		<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
+		<tr></tr>
 	</table>
 </body>
+
 </html>
