@@ -10,9 +10,14 @@
     <div class="main-content">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel">
+                <div class="panel"> 
                     <div class="panel-heading">
                         <h3 class="panel-title">FORM PERSETUJUAN BARANG</h3>
+                        @if($jml_status  > 0)
+                            <span class="label label-success">Berhasil di Proses</span>
+                        @else($jml_status == 0)
+                            <span class="label label-danger">Belum di Proses</span>
+                        @endif
                     </div>
                     <div class="panel-body">
                         <form action="/persetujuan/proses/{{$pengajuan->id}}" method="post">
@@ -83,10 +88,14 @@
                                                     <th>Nama Barang</th>
                                                     <th>Link & Gambar</th>
                                                     <th>Quantity</th>
+                                                    <th>Satuan Barang</th>
                                                     <th>Harga Satuan</th>
                                                     <th>Jumlah</th>
-                                                    <th>Setujui</th>
-                                                    <th></th>
+                                                        @if($jml_status > 0)
+                                                             <th>Setujui</th>
+                                                        @elseif($jml_status == 0)
+                                                             <th>Setujui</th>
+                                                        @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -109,6 +118,11 @@
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
+                                                                <input type="text" class="form-control" name="quantity[]" value="{{$barang->satuan_barang}}" readonly>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-10">
                                                                 <input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" value="{{$barang->harga_satuan}}" readonly>
                                                             </div>
                                                         </td>
@@ -118,20 +132,24 @@
                                                             </div>
                                                         </td>
                                                         <td colspan="2">
-                                                                <div class="col-10">
-                                                                    <select name="status[]" class="form-inline">
-                                                                        <option value="null" selected hidden>TTD</option>
+                                                            <div class="col-10">
+                                                                @if($barang->status != '')
+                                                                    <input type="text" class="form-control" value="{{$barang->status}}" readonly>
+                                                                @elseif($barang->status == '')
+                                                                     <select name="status[]" class="form-inline" required>
+                                                                        <option value="" selected hidden>-- Isi --</option>
                                                                         <option value="Ya">Ya</option>
                                                                         <option value="Tidak">Tidak</option>
                                                                     </select>
-                                                                </div>
+                                                                 @endif
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach ?>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="4" class="text-right"><b>Total</b></td>
+                                                    <td colspan="5" class="text-right"><b>Total</b></td>
                                                     <td>
                                                         <div class="col-10">
                                                             <input type="number" name="total_harga" class="form-control" value="{{$pengajuan->total_harga}}" readonly>
@@ -148,13 +166,21 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">CATATAN</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" name="catatan"></textarea>
+                                    @if($pengajuan->catatan != null)
+                                        <textarea class="form-control" rows="3" name="catatan" disabled>{{$pengajuan->catatan}}</textarea>
+                                    @else
+                                        <textarea class="form-control" rows="3" name="catatan" placeholder="(Opsional)"></textarea>
+                                    @endif
                                 </div>
                             </div>
                             <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Kirim Form</button>
+                                    @if($jml_status  > 0)
+                                        <button class="hidden"></button>
+                                    @elseif($jml_status == 0)
+                                        <button type="submit" class="btn btn-primary">Kirim Form</button>
+                                    @endif
                                 </div>
                             </div>
                         </form>
