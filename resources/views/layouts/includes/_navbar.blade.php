@@ -9,7 +9,7 @@
 				@if(request()->path() != 'dasboard' && request()->path() != 'pengajuan')
 					<form class="navbar-form navbar-left" action="{{'persetujuan' == request()->path() ? '/persetujuan' : '/history'}}" method="GET">
 						<div class="input-group">
-							<input type="text" class="form-control" name="cari" placeholder="{{'persetujuan' == request()->path() ? 'Cari persetujuan' : 'Cari history'}}" autocomplete="off">
+							<input type="text" class="form-control" name="cari" placeholder="{{'persetujuan' == request()->path() ? 'Cari pengajuan' : 'Cari history'}}" autocomplete="off">
 							<span class="input-group-btn">
 								<button type="submit" class="btn btn-primary">Cari</button>
 							</span>
