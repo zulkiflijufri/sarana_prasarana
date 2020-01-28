@@ -56,7 +56,7 @@
 		</tbody>
 	</table>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br>
+	<br><br><br><br><br><br>
 	<p align="justify">Catatan: {{$pengajuan->catatan}}</p>
 	<table style="border-collapse:collapse; margin-left: none" border="1" cellpadding="2" cellspacing="2" align="center" width="100%">
 		<tr>
