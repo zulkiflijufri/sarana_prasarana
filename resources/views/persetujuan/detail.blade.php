@@ -113,17 +113,25 @@
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
-                                                                <input type="number" class="form-control" id="quantity" name="quantity[]" value="{{$barang->quantity}}" readonly>
+                                                                @if($jml_status > 0)
+                                                                    <input type="number" class="form-control" id="quantity" name="quantity[]" value="{{$barang->quantity}}" autocomplete="off" readonly>
+                                                                @else
+                                                                    <input type="number" class="form-control" id="quantity" name="quantity[]" value="{{$barang->quantity}}" autocomplete="off">
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
-                                                                <input type="text" class="form-control" name="quantity[]" value="{{$barang->satuan_barang}}" readonly>
+                                                                <input type="text" class="form-control" name="satuan_barang[]" value="{{$barang->satuan_barang}}" readonly>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
-                                                                <input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" value="{{$barang->harga_satuan}}" readonly>
+                                                                @if($jml_status > 0)
+                                                                    <input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" value="{{$barang->harga_satuan}}" autocomplete="off" readonly>
+                                                                @else
+                                                                    <input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" value="{{$barang->harga_satuan}}" autocomplete="off">
+                                                                @endif
                                                             </div>
                                                         </td>
                                                         <td>
@@ -176,9 +184,7 @@
                             <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    @if($jml_status  > 0)
-                                        <button class="hidden"></button>
-                                    @elseif($jml_status == 0)
+                                    @if($jml_status  == 0)
                                         <button type="submit" class="btn btn-primary">Kirim Form</button>
                                     @endif
                                 </div>
