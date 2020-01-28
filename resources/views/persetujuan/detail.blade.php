@@ -14,7 +14,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">FORM PERSETUJUAN BARANG</h3>
                         @if($jml_status  > 0)
-                            <span class="label label-success">Berhasil di Proses</span>
+                            <span class="label label-success">Sudah di Proses</span>
                         @else($jml_status == 0)
                             <span class="label label-danger">Belum di Proses</span>
                         @endif
