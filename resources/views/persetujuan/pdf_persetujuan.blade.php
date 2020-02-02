@@ -27,26 +27,26 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $no=1; ?>
+			<?php $no = 1; ?>
 			<?php foreach ($barangs as $key => $barang) : ?>
 				@if($barang->status == '')
-					<tr>
-						<td align="center">{{++$key}}.</td>
-						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
-						<td align="center" colspan="4">{{$barang->quantity}}</td>
-						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
-						<td align="center" colspan="4">Rp. {{$barang->harga_satuan}}</td>
-						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
-					</tr>
+				<tr>
+					<td align="center">{{++$key}}.</td>
+					<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+					<td align="center" colspan="4">{{$barang->quantity}}</td>
+					<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+					<td align="center" colspan="4">Rp. {{$barang->harga_satuan}}</td>
+					<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
+				</tr>
 				@elseif($barang->status == 'Ya')
-					<tr>
-						<td align="center">{{$no++}}.</td>
-						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
-						<td align="center" colspan="4">{{$barang->quantity}}</td>
-						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
-						<td align="center" colspan="4">Rp. {{$barang->harga_satuan}}</td>
-						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
-					</tr>
+				<tr>
+					<td align="center">{{$no++}}.</td>
+					<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+					<td align="center" colspan="4">{{$barang->quantity}}</td>
+					<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+					<td align="center" colspan="4">Rp. {{$barang->harga_satuan}}</td>
+					<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
+				</tr>
 				@endif
 			<?php endforeach ?>
 			<tr>
@@ -78,12 +78,12 @@
 			<td rowspan="11"></td>
 			<td rowspan="11">
 				@if($jml_status != 0)
-					<img src="../public/admin/assets/img/ttd_biro.jpg" width="80" height="50" style="margin-left: 30px; margin-bottom: 10px">
+				<img src="../public/admin/assets/img/ttd_biro.jpg" width="80" height="50" style="margin-left: 30px; margin-bottom: 10px">
 				@endif
 			</td>
 			<td rowspan="11">
 				@if($jml_status != 0)
-					<img src="../public/admin/assets/img/ttd_yayasan.jpg" width="80" height="50" style="margin-left: 30px;margin-bottom: 10px">
+				<img src="../public/admin/assets/img/ttd_yayasan.jpg" width="80" height="50" style="margin-left: 30px;margin-bottom: 10px">
 				@endif
 			</td>
 			<td rowspan="11"></td>
