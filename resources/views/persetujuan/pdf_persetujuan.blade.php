@@ -8,9 +8,12 @@
 <body>
 	<img src="../public/admin/assets/img/nf.png" width="135" height="135" style="float: left;">
 	<p align="center" style="color: #10316b; font-size: 28px"><b>Yayasan Profesi Terpadu Nurul Fikri</b></p>
-	<p align="justify" style="color: #10316b;">Jl Raya Lenteng Agung Timur No. 20, Sreseng Sawah, Jakarta Selatan - 12640 Telp +62 21 787 4223, 787 4224</p>
+	<p align="justify" style="color: #10316b;">Jl Raya Lenteng Agung Timur No. 20, Srengseng Sawah, Jakarta Selatan - 12640 Telp +62 21 787 4223, 787 4224</p>
 	<br><br>
 	<span style="font-size: 18px; color: #10316b;"><b>FORM PENGAJUAN BARANG</b></span>
+	@if($barangs->count() == $no_barang->count())
+		<span style="float: right; font-size: 16px; color: red;">Tidak ada barang yang disetujui</span>
+	@endif
 	<br>
 	<p style="float: left;">Perihal: {{$pengajuan->perihal}}</p>
 	<p style="float: right;">Unit: {{$pengajuan->unit}}</p>
@@ -44,14 +47,14 @@
 					<td align="center" colspan="6">{{$barang->nama_barang}}</td>
 					<td align="center" colspan="4">{{$barang->quantity}}</td>
 					<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
-					<td align="center" colspan="4">Rp. {{$barang->harga_satuan}}</td>
-					<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
+					<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
+					<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
 				</tr>
 				@endif
 			<?php endforeach ?>
 			<tr>
 				<td colspan="19" align="right"><b>Total</b></td>
-				<td colspan="4" align="center"><b>Rp. {{$pengajuan->total_harga}}</b></td>
+				<td colspan="4" align="center"><b>Rp. {{number_format($pengajuan->total_harga,0,',','.')}}</b></td>
 			</tr>
 		</tbody>
 	</table>
@@ -77,12 +80,12 @@
 			<td rowspan="11"></td>
 			<td rowspan="11"></td>
 			<td rowspan="11">
-				@if($jml_status != 0)
+				@if($acc_barang->count() != 0)
 				<img src="../public/admin/assets/img/ttd_biro.jpg" width="80" height="50" style="margin-left: 30px; margin-bottom: 10px">
 				@endif
 			</td>
 			<td rowspan="11">
-				@if($jml_status != 0)
+				@if($acc_barang->count() != 0)
 				<img src="../public/admin/assets/img/ttd_yayasan.jpg" width="80" height="50" style="margin-left: 30px;margin-bottom: 10px">
 				@endif
 			</td>
