@@ -8,7 +8,7 @@
 		<div class="panel panel-headline">
 			<div class="panel-heading">
 				<h3 class="panel-title">Tinjauan Pengajuan</h3>
-				<p class="panel-subtitle"><?php echo date('l, d-m-Y H:i A') ?></p>
+				<p class="panel-subtitle"><?php echo date('l, d-M-Y H:i A') ?></p>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -53,4 +53,12 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+	@if(session('login'))
+		toastr.success('{{session('login')}}')
+	@endif
+</script>
 @endsection
