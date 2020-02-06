@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         // jika berhasil login
         if(Auth::attempt($request->only('email', 'password'))) {
-            return redirect ('/dasboard');
+            return redirect ('/dasboard')->with('login', 'Anda berhasil login');
         }
 
         return redirect('/')->with('gagal', 'Email atau Password salah');
