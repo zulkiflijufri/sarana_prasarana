@@ -24,8 +24,7 @@ class PersetujuanController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
         $barangs = Barang::where('pengajuan_id', $id)->get();
         $status_barang = Barang::where('pengajuan_id', $id)->whereIn('status', ['Ya', 'Tidak'])->get();
-        $jml_status = count($status_barang);
-        return view ('persetujuan.detail', compact('barangs','pengajuan','jml_status'));
+        return view ('persetujuan.detail', compact('barangs','pengajuan','status_barang'));
     }
 
     public function delete($id) {
@@ -69,9 +68,9 @@ class PersetujuanController extends Controller
     {
         $pengajuan = Pengajuan::findOrFail($id);
         $barangs = Barang::where('pengajuan_id', $id)->get();
-        $acc_barangs = Barang::where('pengajuan_id', $id)->whereIn('status', ['Ya'])->get();
-        $jml_status = count($acc_barangs);
-        $pdf = PDF::loadview('persetujuan.pdf_persetujuan',compact('pengajuan','barangs','acc_barangs','jml_status'));
+        $acc_barang = Barang::where('pengajuan_id', $id)->whereIn('status', ['Ya'])->get();
+        $no_barang = Barang::where('pengajuan_id', $id)->whereIn('status', ['Tidak'])->get();
+        $pdf = PDF::loadview('persetujuan.pdf_persetujuan',compact('pengajuan','barangs','acc_barang','no_barang'));
         return $pdf->stream('Pengajuan Barang_'.$pengajuan->nama_pengajuan.'.pdf');
     }
 }

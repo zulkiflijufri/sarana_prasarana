@@ -35,9 +35,15 @@
               </td>
             </tr>
           @empty
-            <tr>
-              <td colspan="5" align="center"><i>- Data pengajuan masih kosong -</i></td>
-            </tr>
+            @if(request()->get('hasil') == '')
+              <tr>
+                <td colspan="5" align="center"><i>- Data pengajuan tidak ditemukan -</i></td>
+              </tr>
+            @else
+              <tr>
+                <td colspan="5" align="center"><i>- Data pengajuan masih kosong -</i></td>
+              </tr>
+            @endif
           @endforelse
         </tbody>
       </table>

@@ -34,9 +34,15 @@
 	                <td><a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a></td>
 	              </tr>
               @empty
-	              <tr>
-	                <td colspan="6" align="center"><i> - History pengajuan masih kosong -</i></td>
-	              </tr>
+                @if(request()->get('hasil') == '')
+                  <tr>
+                    <td colspan="6" align="center"><i> - History pengajuan tidak ditemukan -</i></td>
+                  </tr>
+                @else
+  	              <tr>
+  	                <td colspan="6" align="center"><i> - History pengajuan masih kosong -</i></td>
+  	              </tr>
+                @endif
               @endforelse
             </tbody>
           </table>

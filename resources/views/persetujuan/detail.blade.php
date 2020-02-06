@@ -13,9 +13,9 @@
                 <div class="panel"> 
                     <div class="panel-heading">
                         <h3 class="panel-title">FORM PERSETUJUAN BARANG</h3>
-                        @if($jml_status  > 0)
+                        @if($status_barang->count()  > 0)
                             <span class="label label-success">Sudah di Proses</span>
-                        @else($jml_status == 0)
+                        @else($status_barang->count() == 0)
                             <span class="label label-danger">Belum di Proses</span>
                         @endif
                     </div>
@@ -91,11 +91,7 @@
                                                     <th>Satuan Barang</th>
                                                     <th>Harga Satuan</th>
                                                     <th>Jumlah</th>
-                                                        @if($jml_status > 0)
-                                                             <th>Setujui</th>
-                                                        @elseif($jml_status == 0)
-                                                             <th>Setujui</th>
-                                                        @endif
+                                                    <th>Setujui</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -113,7 +109,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
-                                                                @if($jml_status > 0)
+                                                                @if($status_barang->count() > 0)
                                                                     <input type="number" class="form-control" id="quantity" name="quantity[]" value="{{$barang->quantity}}" autocomplete="off" readonly>
                                                                 @else
                                                                     <input type="number" class="form-control" id="quantity" name="quantity[]" value="{{$barang->quantity}}" autocomplete="off">
@@ -127,7 +123,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
-                                                                @if($jml_status > 0)
+                                                                @if($status_barang->count() > 0)
                                                                     <input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" value="{{$barang->harga_satuan}}" autocomplete="off" readonly>
                                                                 @else
                                                                     <input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" value="{{$barang->harga_satuan}}" autocomplete="off">
@@ -184,7 +180,7 @@
                             <br><br>
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    @if($jml_status  == 0)
+                                    @if($status_barang->count()  == 0)
                                         <button type="submit" class="btn btn-primary">Kirim Form</button>
                                     @endif
                                 </div>
