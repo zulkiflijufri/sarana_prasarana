@@ -182,7 +182,7 @@
 		// date
 		$(function(){
 			$(".datepicker").datepicker({
-				dateFormat: "dd-mm-yy",
+				dateFormat: "dd-MM-yy",
 				minDate: 0,
 				maxDate: "+1M +5D"
 			});
