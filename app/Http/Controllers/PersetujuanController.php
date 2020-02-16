@@ -15,7 +15,7 @@ class PersetujuanController extends Controller
             ->orWhere('unit', 'LIKE', '%'.$request->cari.'%')->orWhere('waket_satker', 'LIKE',
             '%'.$request->cari.'%')->orderBy('id','DESC')->paginate(5);
         } else {
-            $pengajuans = Pengajuan::orderBy('id', 'DESC')->paginate(5);
+            $pengajuans = Pengajuan::orderBy('id', 'DESC')->simplePaginate(5);
         }
         return view ('persetujuan.index', compact('pengajuans'));
     }
@@ -45,7 +45,8 @@ class PersetujuanController extends Controller
 
         $catatan = $request->catatan;
         Pengajuan::where('id', $id)->update([
-            'catatan' => $catatan
+            'catatan' => $catatan,
+            'proses' => 'Selesai'
         ]);
 
         return redirect('/persetujuan')->with('proses', 'Pengajuan Berhasil Di Proses');
@@ -57,9 +58,9 @@ class PersetujuanController extends Controller
             $pengajuans = Pengajuan::where('perihal', 'LIKE', '%'.$request->cari.'%')
             ->orWhere('unit', 'LIKE', '%'.$request->cari.'%')->orWhere('waket_satker', 'LIKE',
             '%'.$request->cari.'%')->orWhere('tanggal', 'LIKE', '%'.$request->cari.'%')
-            ->orderBy('id','DESC')->paginate(8);
+            ->orderBy('id','DESC')->simplePaginate(8);
         } else {
-            $pengajuans = Pengajuan::orderBy('id', 'DESC')->paginate(8);
+            $pengajuans = Pengajuan::orderBy('id', 'DESC')->simplePaginate(8);
         }
         return view ('persetujuan.history', ['pengajuans' => $pengajuans]);
     }
