@@ -20,6 +20,7 @@ class CreatePengajuanTable extends Migration
             $table->string('waket_satker', 50);
             $table->string('perihal', 50);
             $table->string('tanggal', 20);
+            $table->enum('proses',['Belum','Selesai'])->default('Belum');
             $table->text('catatan')->nullable();
             $table->integer('total_harga');
             $table->timestamps();
