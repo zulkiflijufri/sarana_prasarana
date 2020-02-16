@@ -20,6 +20,7 @@
                 <th>UNIT</th>
                 <th>WAKET & SATKER</th>
                 <th>TANGGAL PENGAJUAN</th>
+                <th>STATUS</th>
                 <th></th>
               </tr>
             </thead>
@@ -31,6 +32,13 @@
 	                <td>{{$pengajuan->unit}}</td>
 	                <td>{{$pengajuan->waket_satker}}</td>
 	                <td>{{$pengajuan->tanggal}}</td>
+                  <td>
+                    @if($pengajuan->proses == 'Belum')
+                      <span class="label label-danger">Belum diproses</span>
+                    @else
+                      <span class="label label-success">Sudah diproses</span>
+                    @endif
+                  </td>
 	                <td><a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a></td>
 	              </tr>
               @empty
