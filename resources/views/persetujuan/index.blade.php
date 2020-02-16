@@ -19,6 +19,7 @@
             <th>NAMA PENGAJUAN</th>
             <th>UNIT</th>
             <th>SATKER & WATKER</th>
+            <th>STATUS</th>
             <th><!-- Aksi --></th>
           </tr>
         </thead>
@@ -30,8 +31,19 @@
               <td>{{$pengajuan->unit}}</td>
               <td>{{$pengajuan->waket_satker}}</td>
               <td>
+                @if($pengajuan->proses == 'Belum')
+                  <span class="label label-danger">Belum diproses</span>
+                @else
+                  <span class="label label-success">Sudah diproses</span>
+                @endif
+              </td>
+              <td>
                 <a href="/persetujuan/detail/{{$pengajuan->id}}" title="Lihat"><span class="lnr lnr-eye"></span></a>&nbsp;
-                <a href="#"><span class="lnr lnr-trash hapus" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus"></span></a>
+                @if($pengajuan->proses == 'Belum')
+                  <a href="#"><span class="lnr lnr-trash hapus" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus" style="margin-left: 10px; opacity: 0.5; pointer-events: none;"></span></a>
+                @else
+                  <a href="#"><span class="lnr lnr-trash hapus" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus" style="margin-left: 10px;"></span></a>
+                @endif
               </td>
             </tr>
           @empty
