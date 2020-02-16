@@ -25,6 +25,16 @@
 
 	<!-- Toastr -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+	<style>
+		.pagination{
+			padding-left: 310px;
+		}
+
+		/*.pagination>li:first-child>a, .pagination>li:first-child>span{
+			margin-left: 80px;
+		}*/
+	</style>
 </head>
 
 <body>
