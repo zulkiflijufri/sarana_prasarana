@@ -13,11 +13,6 @@
                 <div class="panel"> 
                     <div class="panel-heading">
                         <h3 class="panel-title">FORM PERSETUJUAN BARANG</h3>
-                        @if($status_barang->count()  > 0)
-                            <span class="label label-success">Sudah di Proses</span>
-                        @else($status_barang->count() == 0)
-                            <span class="label label-danger">Belum di Proses</span>
-                        @endif
                     </div>
                     <div class="panel-body">
                         <form action="/persetujuan/proses/{{$pengajuan->id}}" method="post">
@@ -132,7 +127,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
-                                                                <input type="number" class="form-control" name="jumlah[]" value="{{$barang->jumlah}}" readonly>
+                                                                <input type="number" class="form-control" id="jumlah" name="jumlah[]" value="{{$barang->jumlah}}" readonly>
                                                             </div>
                                                         </td>
                                                         <td colspan="2">
@@ -194,4 +189,17 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
+@endsection
+
+@section('footer')
+    <script>
+        //operasi perhitungan
+        $('tbody').keyup(function(){
+            var bil1 = parseInt($('#quantity').val());
+            var bil2 = parseInt($('#harga_satuan').val());
+            var jumlah = bil1 * bil2;
+
+            $('#jumlah').attr('value', jumlah);
+        });
+    </script>
 @endsection
