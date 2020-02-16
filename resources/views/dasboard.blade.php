@@ -23,19 +23,19 @@
 					</div>
 					<div class="col-md-3">
 						<div class="metric">
-							<span class="icon"><i class="fa fa-shopping-bag"></i></span>
+							<span class="icon"><i class="fa fa-envelope"></i></span>
 							<p>
-								<span class="number">{{count($barang)}}</span>
-								<span class="title">Barang</span>
+								<span class="number">{{count($no_proses)}}</span>
+								<span class="title">Belum diproses</span>
 							</p>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="metric">
-							<span class="icon"><i class="fa fa-envelope"></i></span>
+							<span class="icon"><i class="fa fa-shopping-bag"></i></span>
 							<p>
-								<span class="number">{{count($no_proses)}}</span>
-								<span class="title">Belum diproses</span>
+								<span class="number">{{count($barang)}}</span>
+								<span class="title">Barang</span>
 							</p>
 						</div>
 					</div>
