@@ -37,10 +37,14 @@ class PersetujuanController extends Controller
     {   
         $status = $request->status;
         $nama_barang = $request->nama_barang;
-        for ($i = 0; $i < count($status); $i++) {
-            Barang::where('nama_barang', $nama_barang[$i])->update([
-                'status' => $status[$i]
-            ]);   
+        $barang = Barang::where('pengajuan_id',$id)->get();
+        // dd($barang[0]->pengajuan_id);
+        for ($i = 0; $i < count($nama_barang); $i++) {
+            Barang::where([
+                ['nama_barang', '=', $barang[$i]->nama_barang],
+                ['pengajuan_id', '=',$barang[0]->pengajuan_id]])->update([
+                    'status' => $status[$i]
+            ]);
         }
 
         $catatan = $request->catatan;
