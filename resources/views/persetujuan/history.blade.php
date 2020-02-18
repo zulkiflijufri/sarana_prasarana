@@ -39,7 +39,13 @@
                       <span class="label label-success">Sudah diproses</span>
                     @endif
                   </td>
-	                <td><a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a></td>
+	                <td>
+                    @if($pengajuan->proses == 'Belum')
+                      <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf" style="pointer-events:none; opacity: 0.6"><span class="lnr lnr-cloud-download"></span></a>
+                    @else
+                      <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
+                    @endif
+                  </td>
 	              </tr>
               @empty
                 @if(request()->get('hasil') == '')
