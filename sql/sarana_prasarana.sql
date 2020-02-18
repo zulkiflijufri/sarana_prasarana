@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 17 Des 2019 pada 14.44
+-- Generation Time: 18 Feb 2020 pada 15.45
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -32,7 +32,8 @@ CREATE TABLE `barang` (
   `id` int(10) UNSIGNED NOT NULL,
   `nama_barang` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `link_gambar` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `quantity` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `satuan_barang` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `harga_satuan` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -45,23 +46,17 @@ CREATE TABLE `barang` (
 -- Dumping data untuk tabel `barang`
 --
 
-INSERT INTO `barang` (`id`, `nama_barang`, `link_gambar`, `quantity`, `harga_satuan`, `jumlah`, `status`, `pengajuan_id`, `created_at`, `updated_at`) VALUES
-(23, 'apa aja', 'iya.com', '2 pcs', 424, 848, NULL, 22, NULL, NULL),
-(24, 'test', 'fb.com', '10 lusin', 100, 1000, NULL, 23, NULL, NULL),
-(25, 'lagu', 'ini.com', '7 pcs', 88, 616, NULL, 24, NULL, NULL),
-(26, 'tulis', 'utknya.com', '3 paket', 87, 261, NULL, 25, NULL, NULL),
-(27, 'inibudi', 'yes.com', '9 paket', 100, 900, NULL, 26, NULL, NULL),
-(28, 'apaya', 'gatau.com', '2 pcs', 10, 20, NULL, 27, NULL, NULL),
-(29, 'sofel', 'autan.com', '5 pcs', 1500, 7500, NULL, 28, NULL, NULL),
-(30, 'nah', 'kan.com', '4 pcs', 2324, 9296, NULL, 29, NULL, NULL),
-(31, 'kain', 'kain.net', '100 pcs', 10000, 1000000, NULL, 30, NULL, NULL),
-(32, 'Baju', 'baju.bet', '100 pcs', 1000, 100000, NULL, 31, NULL, '2019-12-08 07:32:34'),
-(33, 'Pensil', 'pensil.net', '100 pcs', 1000, 100000, 'Disetujui', 32, NULL, '2019-12-08 07:31:30'),
-(34, 'Pulpen', 'pulpen.net', '100 pcs', 2000, 200000, 'Tidak Disetujui', 32, NULL, '2019-12-08 07:31:30'),
-(35, 'Penghapus', 'peng.id', '50 pcs', 500, 25000, 'Disetujui', 32, NULL, '2019-12-08 07:31:30'),
-(36, 'Tas', 'tas.com', '1 pcs', 1000, 1000, 'Tidak Disetujui', 32, NULL, '2019-12-08 07:31:30'),
-(37, 'yeyeee', 'la.com', '12 pcs', 1000, 1000, NULL, 32, NULL, NULL),
-(38, 'aaaa', 'aaa', 'aa', 111, 1111, NULL, 30, NULL, NULL);
+INSERT INTO `barang` (`id`, `nama_barang`, `link_gambar`, `quantity`, `satuan_barang`, `harga_satuan`, `jumlah`, `status`, `pengajuan_id`, `created_at`, `updated_at`) VALUES
+(1, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 1, NULL, NULL),
+(2, 'Contrary', 'Contrary', 1, 'pcs', 2000, 2000, NULL, 1, NULL, NULL),
+(3, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 2, NULL, NULL),
+(4, 'Contrary', 'Contrary', 1, 'pcs', 2000, 2000, NULL, 2, NULL, NULL),
+(5, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 3, NULL, NULL),
+(6, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2000, NULL, 3, NULL, NULL),
+(7, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 4, NULL, NULL),
+(8, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2000, NULL, 4, NULL, NULL),
+(9, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 5, NULL, NULL),
+(10, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2000, NULL, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -80,10 +75,10 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(9, '2019_10_29_155041_create-pengajuan-table', 2),
-(10, '2019_11_15_181502_create_barang_table', 2);
+(9, '2014_10_12_000000_create_users_table', 1),
+(10, '2014_10_12_100000_create_password_resets_table', 1),
+(11, '2019_10_29_155041_create_pengajuan_table', 1),
+(12, '2019_11_15_181502_create_barang_table', 1);
 
 -- --------------------------------------------------------
 
@@ -110,6 +105,7 @@ CREATE TABLE `pengajuan` (
   `waket_satker` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `perihal` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `proses` enum('Belum','Selesai') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Belum',
   `catatan` text COLLATE utf8mb4_unicode_ci,
   `total_harga` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -120,18 +116,12 @@ CREATE TABLE `pengajuan` (
 -- Dumping data untuk tabel `pengajuan`
 --
 
-INSERT INTO `pengajuan` (`id`, `nama_pengajuan`, `unit`, `waket_satker`, `perihal`, `tanggal`, `catatan`, `total_harga`, `created_at`, `updated_at`) VALUES
-(22, 'Zul', 'NF Komputer', 'WAKET 1 (LPMI)', 'Pencetakan', '05-12-2019', NULL, 848, '2019-12-05 07:30:58', '2019-12-05 07:30:58'),
-(23, 'Kifli', 'NF Komputer', 'WAKET 1 (LPPMI)', 'Pencetakan', '05-12-2019', NULL, 1000, '2019-12-05 07:31:33', '2019-12-05 07:31:33'),
-(24, 'Ummi', 'NF Komputer', 'WAKET 1 (PRODI)', 'Pencetakan', '05-12-2019', NULL, 616, '2019-12-05 07:33:22', '2019-12-05 07:33:22'),
-(25, 'Kalsum', 'NF Komputer', 'WAKET 1 (PRODI)', 'Pencetakan', '05-12-2019', NULL, 261, '2019-12-05 07:33:54', '2019-12-05 07:33:54'),
-(26, 'Muhammad', 'NF Komputer', 'WAKET 3', 'Pencetakan', '05-12-2019', NULL, 900, '2019-12-05 07:35:40', '2019-12-05 07:35:40'),
-(27, 'Fakhri', 'NF Komputer', 'WAKET 1 (LPPMI)', 'Pencetakan', '05-12-2019', NULL, 20, '2019-12-05 07:36:17', '2019-12-05 07:36:17'),
-(28, 'Wiwi', 'NF Komputer', 'WAKET 1 (LLC)', 'Pencetakan', '05-12-2019', NULL, 7500, '2019-12-05 07:36:54', '2019-12-05 07:36:54'),
-(29, 'Ariyanti', 'NF Komputer', 'WAKET 1 (LPMI)', 'Hardware', '05-12-2019', NULL, 9296, '2019-12-05 07:37:32', '2019-12-05 07:37:32'),
-(30, 'Arief', 'NF Komputer', 'WAKET 1 (LPMI)', 'Pencetakan', '05-12-2019', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit..', 1000000, '2019-12-05 07:54:07', '2019-12-17 00:56:09'),
-(31, 'Aisyah', 'STT NF', 'WAKET 1 (LPMI)', 'Hardware', '05-12-2019', NULL, 100000, '2019-12-05 08:36:26', '2019-12-05 08:36:26'),
-(32, 'Jufri', 'STT NF', 'WAKET 1 (LLC)', 'ATK (Alat Tulis Kantor)', '05-12-2019', 'Lorem ipsum dolor sit amet, consectetur adipisicing', 325000, '2019-12-05 08:39:42', '2019-12-08 07:32:34');
+INSERT INTO `pengajuan` (`id`, `nama_pengajuan`, `unit`, `waket_satker`, `perihal`, `tanggal`, `proses`, `catatan`, `total_harga`, `created_at`, `updated_at`) VALUES
+(1, 'Zulkifli Jufri', 'STT NF', 'WAKET 1 (BAAK)', 'ATK (Alat Tulis Kantor)', '18-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:40:41', '2020-02-18 14:40:41'),
+(2, 'Ummi Kalsum', 'NF Komputer', 'WAKET 1 (LLC)', 'Hardware', '19-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:41:37', '2020-02-18 14:41:37'),
+(3, 'Fakhri', 'NF Komputer', 'WAKET 1 (LPMI)', 'Pencetakan', '18-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:42:21', '2020-02-18 14:42:21'),
+(4, 'Yunita', 'NF Komputer', 'WAKET 1 (UPT KOMPUTER)', 'Hardware', '18-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:43:17', '2020-02-18 14:43:17'),
+(5, 'Arief', 'STT NF', 'WAKET 1 (LPMI)', 'Pencetakan', '18-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:44:12', '2020-02-18 14:44:12');
 
 -- --------------------------------------------------------
 
@@ -141,8 +131,8 @@ INSERT INTO `pengajuan` (`id`, `nama_pengajuan`, `unit`, `waket_satker`, `periha
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `role` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -155,10 +145,10 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `role`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Admin', 'admin@gmail.com', NULL, '$2y$10$pYM2z2igguGDgkgkvXR0zuNq61FHjIU8FL2vjf2Ba7d8ksATH3CkK', 'AQWl1qqW7G6WDdIlqC8hlIW6iJN7fjdpCWYktpSNJpTUvrfYl6XE3o2gcz8G', '2019-11-18 06:50:57', '2019-11-18 06:50:57'),
-(2, 'atasan', 'Atasan', 'atasan@gmail.com', NULL, '$2y$10$PsYVbvjRRDpC5VCnOW03x.ufiJI3gHv7CNvXopHxO4p9.MFvflA0G', 'SSNWWzZ1Azb5JYajbDnU4lA9VXIzQoCqLiGQpQOyYk8njeNqyx6WNFiLBEGe', '2019-11-19 10:40:33', '2019-11-19 10:40:33'),
-(3, 'pengajuan', 'Pengajuan', 'pengajuan@gmail.com', NULL, '$2y$10$SSfUZJ20JS.VOe6jINynIe621TxHpjqY7ouWsrsPM7iL5F1s/1DqW', 'AN0HG4iORms4lgPTwrusLWe7gvsE45bATwIJflvg3beGZFJQ0VvGCEwRJgrw', '2019-11-19 10:42:26', '2019-11-19 10:42:26');
+INSERT INTO `users` (`id`, `name`, `role`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin', 'admin@gmail.com', NULL, '$2y$10$UroaJxv9lIKDYfsyKZDMa.mK2LIDLWSShkONXtLD/yqEzE9.qLrd6', 'IpmgH27LJv1rFZ6ZRADIpQszdi0SsB9YsM4ytCXDGIjTSmqiof3Axkvqrkxo', '2020-02-16 22:13:01', '2020-02-16 22:13:01'),
+(2, 'Pengajuan', 'pengajuan', 'pengajuan@gmail.com', NULL, '$2y$10$hljVMAwffmSoIDD3XNOVW.PorrpjU99jWqjFFM/aBmiAHQ4JWgBUK', 'oXWdQHDdnU5EckMEKkZDjGYtL1gPouFKOY75omShKALYDzsg3UrtMMlvBqzznRlQn3mtxlHJXBSWR3RyQRYfSu3WpJ', '2020-02-16 22:40:49', '2020-02-16 22:41:35'),
+(3, 'Atasan', 'atasan', 'atasan@gmail.com', NULL, '$2y$10$O65lwpUAZr62ouLvFXvovubK2oilIWiA7Stgz3HmGLIFr0YCINZny', '9gpyNKkFVYwf32gcMnG8U1CUDmgb82tiWNy5uj94tVXkRo7Tx5s1sj0f2SojqWZ8lqS9KFuoLANQZN9WTOxhCqpFDb', '2020-02-16 22:56:31', '2020-02-16 22:56:31');
 
 --
 -- Indexes for dumped tables
@@ -204,19 +194,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
