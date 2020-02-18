@@ -13,9 +13,9 @@ class PersetujuanController extends Controller
         if ($request->has('cari')) {
             $pengajuans = Pengajuan::where('nama_pengajuan', 'LIKE', '%'.$request->cari.'%')
             ->orWhere('unit', 'LIKE', '%'.$request->cari.'%')->orWhere('waket_satker', 'LIKE',
-            '%'.$request->cari.'%')->orderBy('id','DESC')->paginate(5);
+            '%'.$request->cari.'%')->simplePaginate(5);
         } else {
-            $pengajuans = Pengajuan::orderBy('id', 'DESC')->simplePaginate(5);
+            $pengajuans = Pengajuan::simplePaginate(5);
         }
         return view ('persetujuan.index', compact('pengajuans'));
     }
