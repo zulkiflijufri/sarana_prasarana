@@ -58,9 +58,9 @@ class PersetujuanController extends Controller
             $pengajuans = Pengajuan::where('perihal', 'LIKE', '%'.$request->cari.'%')
             ->orWhere('unit', 'LIKE', '%'.$request->cari.'%')->orWhere('waket_satker', 'LIKE',
             '%'.$request->cari.'%')->orWhere('tanggal', 'LIKE', '%'.$request->cari.'%')
-            ->orderBy('id','DESC')->simplePaginate(8);
+            ->simplePaginate(8);
         } else {
-            $pengajuans = Pengajuan::orderBy('id', 'DESC')->simplePaginate(8);
+            $pengajuans = Pengajuan::simplePaginate(8);
         }
         return view ('persetujuan.history', ['pengajuans' => $pengajuans]);
     }
