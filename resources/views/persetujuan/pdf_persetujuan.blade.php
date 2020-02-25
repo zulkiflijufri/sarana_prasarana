@@ -11,9 +11,6 @@
 	<p align="justify" style="color: #10316b;">Jl Raya Lenteng Agung Timur No. 20, Srengseng Sawah, Jakarta Selatan - 12640 Telp +62 21 787 4223, 787 4224</p>
 	<br><br>
 	<span style="font-size: 18px; color: #10316b;"><b>FORM PENGAJUAN BARANG</b></span>
-	@if($barangs->count() == $no_barang->count())
-		<span style="float: right; font-size: 16px; color: red;">Tidak ada barang yang disetujui</span>
-	@endif
 	<br>
 	<p style="float: left;">Perihal: {{$pengajuan->perihal}}</p>
 	<p style="float: right;">Unit: {{$pengajuan->unit}}</p>
@@ -31,25 +28,25 @@
 		</thead>
 		<tbody>
 			<?php $no = 1; ?>
-			<?php foreach ($barangs as $key => $barang) : ?>
-				@if($barang->status == '')
-				<tr>
-					<td align="center">{{++$key}}.</td>
-					<td align="center" colspan="6">{{$barang->nama_barang}}</td>
-					<td align="center" colspan="4">{{$barang->quantity}}</td>
-					<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
-					<td align="center" colspan="4">Rp. {{$barang->harga_satuan}}</td>
-					<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
-				</tr>
-				@elseif($barang->status == 'Ya')
-				<tr>
-					<td align="center">{{$no++}}.</td>
-					<td align="center" colspan="6">{{$barang->nama_barang}}</td>
-					<td align="center" colspan="4">{{$barang->quantity}}</td>
-					<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
-					<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
-					<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
-				</tr>
+			<?php foreach ($barangs as $barang) : ?>
+				@if($barang->status == 'Tidak')
+					<tr>
+						<td align="center">{{$no++}}.</td>
+						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+						<td align="center" colspan="4">{{$barang->quantity}}</td>
+						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
+						<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
+					</tr>
+				@else
+					<tr>
+						<td align="center">{{$no++}}.</td>
+						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+						<td align="center" colspan="4">{{$barang->quantity}}</td>
+						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
+						<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
+					</tr>
 				@endif
 			<?php endforeach ?>
 			<tr>
