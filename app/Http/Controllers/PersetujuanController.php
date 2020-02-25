@@ -34,11 +34,11 @@ class PersetujuanController extends Controller
     }
 
     public function proses(Request $request ,$id)
-    {   
+    {
         $status = $request->status;
         $nama_barang = $request->nama_barang;
         $barang = Barang::where('pengajuan_id',$id)->get();
-        // dd($barang[0]->pengajuan_id);
+
         for ($i = 0; $i < count($nama_barang); $i++) {
             Barang::where([
                 ['nama_barang', '=', $barang[$i]->nama_barang],
@@ -74,8 +74,7 @@ class PersetujuanController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
         $barangs = Barang::where('pengajuan_id', $id)->get();
         $acc_barang = Barang::where('pengajuan_id', $id)->whereIn('status', ['Ya'])->get();
-        $no_barang = Barang::where('pengajuan_id', $id)->whereIn('status', ['Tidak'])->get();
-        $pdf = PDF::loadview('persetujuan.pdf_persetujuan',compact('pengajuan','barangs','acc_barang','no_barang'));
+        $pdf = PDF::loadview('persetujuan.pdf_persetujuan',compact('pengajuan','barangs','acc_barang'));
         return $pdf->stream('Pengajuan Barang_'.$pengajuan->nama_pengajuan.'.pdf');
     }
 }
