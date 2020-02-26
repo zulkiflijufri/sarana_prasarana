@@ -22,7 +22,7 @@ class CreatePengajuanTable extends Migration
             $table->string('tanggal', 20);
             $table->enum('proses',['Belum','Selesai'])->default('Belum');
             $table->text('catatan')->nullable();
-            $table->integer('total_harga');
+            $table->string('total_harga',11);
             $table->timestamps();
         });
     }
