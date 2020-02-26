@@ -19,7 +19,7 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="{{asset('admin/assets/img/nf.png')}}">
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}">
 	<link rel="icon" type="image/png" sizes="96x96" href="{{asset('admin/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}x">
-	
+
 	<link rel="stylesheet" href="{{asset('admin/assets/css/jquery-ui.min.css')}}">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -43,7 +43,7 @@
 		<!-- NAVBAR -->
             @include('layouts.includes._navbar')
 		<!-- END NAVBAR -->
-		
+
         <!-- LEFT SIDEBAR -->
             @include('layouts.includes._sidebar')
 		<!-- END LEFT SIDEBAR -->
@@ -54,7 +54,7 @@
         		<!-- END MAIN -->
 			</div>
 		</div>
-			
+
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
@@ -72,7 +72,7 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<!-- Toastr -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-	
+	<script src="{{asset('js/jautocalc.js')}}"></script>
 	@yield('footer')
 </body>
 </html>
