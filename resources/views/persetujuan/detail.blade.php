@@ -10,7 +10,7 @@
     <div class="main-content">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel"> 
+                <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">FORM PERSETUJUAN BARANG</h3>
                     </div>
@@ -22,7 +22,7 @@
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="nama_pengajuan" value="{{$pengajuan->nama_pengajuan}}" disabled>
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">UNIT</label>
                                 <div class="col-sm-10">
@@ -72,12 +72,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">LIST BARANG</label>
                                 <div class="col-sm-10">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" name="cart">
                                             <thead class="bg-info">
                                                 <tr>
                                                     <th>Nama Barang</th>
