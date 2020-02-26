@@ -40,15 +40,19 @@
                     @endif
                   </td>
 	                <td>
-                    @if($pengajuan->proses == 'Belum')
-                      <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf" style="pointer-events:none; opacity: 0.6"><span class="lnr lnr-cloud-download"></span></a>
+                    @if(auth()->user()->role == 'pengajuan')
+                        <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
                     @else
-                      <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
+                    	@if($pengajuan->proses == 'Belum')
+                      		<a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf" style="pointer-events:none; opacity: 0.6"><span class="lnr lnr-cloud-download"></span></a>
+                      	@else
+                        	<a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
+                      	@endif
                     @endif
                   </td>
 	              </tr>
               @empty
-                @if(request()->get('hasil') == '')
+                @if(request()->get('cari') == '')
                   <tr>
                     <td colspan="6" align="center"><i> - History pengajuan tidak ditemukan -</i></td>
                   </tr>
