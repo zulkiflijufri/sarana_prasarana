@@ -47,6 +47,15 @@
 						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
 						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
 					</tr>
+				@else
+					<tr>
+						<td align="center">{{$no++}}.</td>
+						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+						<td align="center" colspan="4">{{$barang->quantity}}</td>
+						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
+						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
+					</tr>
 				@endif
 			<?php endforeach ?>
 			<tr>
