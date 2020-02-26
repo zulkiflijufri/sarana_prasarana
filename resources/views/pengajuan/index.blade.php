@@ -182,6 +182,12 @@
 			});
 		});
 
+		$(document).ready(function() {
+				//$('table[name=cart]').jAutoCalc('destroy');
+				$('table[name=cart] tr[name=line_items').jAutoCalc({keyEventsFire: true,emptyAsZero: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
+				$('table[name=cart]').jAutoCalc({keyEventsFire: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
+		});
+
 		//  tambahBaris
 		$('.tambahBaris').on('click', function() {
 			tambahBaris();
@@ -216,7 +222,7 @@
 			'</td>'+
 			'<td>'+
 			'<div class="col-10">'+
-			'<input type="number" class="form-control" id="jumlah" name="jumlah[]" required jAutoCalc="{quantity} * {harga_satuan}">'+
+			'<input type="text" class="form-control" id="jumlah" name="jumlah[]" required jAutoCalc="{quantity} * {harga_satuan}">'+
 			'</div>'+
 			'</td>'+
 			'<td>'+
@@ -230,25 +236,14 @@
 			$(document).ready(function() {
 				$('table[name=cart]').jAutoCalc('destroy');
 				$('table[name=cart] tr[name=line_items').jAutoCalc({keyEventsFire: true,emptyAsZero: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
-				$('table[name=cart]').jAutoCalc({decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
+				$('table[name=cart]').jAutoCalc({keyEventsFire: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
 			});
 
-			// $('button[name=remove]').click(function(e){
-			// 	e.preventDefault();
-			// 	$(this).parents('table');
-			// 	$(this).parents('tr').remove();
-			// });
 		};
+			//hapus baris
+			$(document).on('click','.hapusBaris', function() {
+				$(this).parents('tr').remove();
+			});
 
-		$(document).ready(function() {
-				// $('table[name=cart]').jAutoCalc('destroy');
-				$('table[name=cart] tr[name=line_items').jAutoCalc({keyEventsFire: true,emptyAsZero: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
-				$('table[name=cart]').jAutoCalc({decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
-		});
-
-		//hapus baris
-		$(document).on('click','.hapusBaris', function() {
-			$(this).closest('tr').remove();
-		});
 	</script>
 @endsection
