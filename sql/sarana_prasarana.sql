@@ -35,7 +35,7 @@ CREATE TABLE `barang` (
   `quantity` int(11) NOT NULL,
   `satuan_barang` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `harga_satuan` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `jumlah` varchar(11) NOT NULL,
   `status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pengajuan_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -47,16 +47,16 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id`, `nama_barang`, `link_gambar`, `quantity`, `satuan_barang`, `harga_satuan`, `jumlah`, `status`, `pengajuan_id`, `created_at`, `updated_at`) VALUES
-(1, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 1, NULL, NULL),
-(2, 'Contrary', 'Contrary', 1, 'pcs', 2000, 2000, NULL, 1, NULL, NULL),
-(3, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 2, NULL, NULL),
-(4, 'Contrary', 'Contrary', 1, 'pcs', 2000, 2000, NULL, 2, NULL, NULL),
-(5, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 3, NULL, NULL),
-(6, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2000, NULL, 3, NULL, NULL),
-(7, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 4, NULL, NULL),
-(8, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2000, NULL, 4, NULL, NULL),
-(9, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1000, NULL, 5, NULL, NULL),
-(10, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2000, NULL, 5, NULL, NULL);
+(1, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1.000, NULL, 1, NULL, NULL),
+(2, 'Contrary', 'Contrary', 1, 'pcs', 2000, 2.000, NULL, 1, NULL, NULL),
+(3, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1.000, NULL, 2, NULL, NULL),
+(4, 'Contrary', 'Contrary', 1, 'pcs', 2000, 2.000, NULL, 2, NULL, NULL),
+(5, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1.000, NULL, 3, NULL, NULL),
+(6, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2.000, NULL, 3, NULL, NULL),
+(7, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1.000, NULL, 4, NULL, NULL),
+(8, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2.000, NULL, 4, NULL, NULL),
+(9, 'Contrary', 'Contrary', 1, 'pcs', 1000, 1.000, NULL, 5, NULL, NULL),
+(10, 'Contrary', 'Contrary', 2, 'pcs', 1000, 2.000, NULL, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -107,7 +107,7 @@ CREATE TABLE `pengajuan` (
   `tanggal` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `proses` enum('Belum','Selesai') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Belum',
   `catatan` text COLLATE utf8mb4_unicode_ci,
-  `total_harga` int(11) NOT NULL,
+  `total_harga` varchar(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -117,11 +117,11 @@ CREATE TABLE `pengajuan` (
 --
 
 INSERT INTO `pengajuan` (`id`, `nama_pengajuan`, `unit`, `waket_satker`, `perihal`, `tanggal`, `proses`, `catatan`, `total_harga`, `created_at`, `updated_at`) VALUES
-(1, 'Zulkifli Jufri', 'STT NF', 'WAKET 1 (BAAK)', 'ATK (Alat Tulis Kantor)', '18-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:40:41', '2020-02-18 14:40:41'),
-(2, 'Ummi Kalsum', 'NF Komputer', 'WAKET 1 (LLC)', 'Hardware', '19-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:41:37', '2020-02-18 14:41:37'),
-(3, 'Fakhri', 'NF Komputer', 'WAKET 1 (LPMI)', 'Pencetakan', '18-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:42:21', '2020-02-18 14:42:21'),
-(4, 'Yunita', 'NF Komputer', 'WAKET 1 (UPT KOMPUTER)', 'Hardware', '18-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:43:17', '2020-02-18 14:43:17'),
-(5, 'Arief', 'STT NF', 'WAKET 1 (LPMI)', 'Pencetakan', '18-February-2020', 'Belum', NULL, 3000, '2020-02-18 14:44:12', '2020-02-18 14:44:12');
+(1, 'Zulkifli Jufri', 'STT NF', 'WAKET 1 (BAAK)', 'ATK (Alat Tulis Kantor)', '18-February-2020', 'Belum', NULL, 3.000, '2020-02-18 14:40:41', '2020-02-18 14:40:41'),
+(2, 'Ummi Kalsum', 'NF Komputer', 'WAKET 1 (LLC)', 'Hardware', '19-February-2020', 'Belum', NULL, 3.000, '2020-02-18 14:41:37', '2020-02-18 14:41:37'),
+(3, 'Fakhri', 'NF Komputer', 'WAKET 1 (LPMI)', 'Pencetakan', '18-February-2020', 'Belum', NULL, 3.000, '2020-02-18 14:42:21', '2020-02-18 14:42:21'),
+(4, 'Yunita', 'NF Komputer', 'WAKET 1 (UPT KOMPUTER)', 'Hardware', '18-February-2020', 'Belum', NULL, 3.000, '2020-02-18 14:43:17', '2020-02-18 14:43:17'),
+(5, 'Arief', 'STT NF', 'WAKET 1 (LPMI)', 'Pencetakan', '18-February-2020', 'Belum', NULL, 3.000, '2020-02-18 14:44:12', '2020-02-18 14:44:12');
 
 -- --------------------------------------------------------
 
