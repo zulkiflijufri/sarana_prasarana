@@ -14,7 +14,6 @@ class PengajuanController extends Controller
     }
 
     public function create(Request $request) {
-
         $pengajuan = $request->all();
         $id_pengajuan = Pengajuan::create($pengajuan)->id;
 
