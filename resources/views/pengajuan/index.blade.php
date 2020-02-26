@@ -72,7 +72,7 @@
 										<input type="text" class="form-control datepicker" name="tanggal" placeholder="Pilih Tanggal" autocomplete="off" required>
 										<div class="input-group-addon">
 											<span class="lnr lnr-calendar-full"></span>
-										</div>			
+										</div>
 									</div>
 								</div>
 							</div>
@@ -80,7 +80,7 @@
 								<label class="col-sm-2 col-form-label">LIST BARANG</label>
 								<div class="col-sm-10">
 									<div class="table-responsive">
-										<table class="table">
+										<table class="table" name="cart">
 											<thead class="bg-info">
 												<tr>
 													<th>Nama Barang</th>
@@ -93,7 +93,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<tr name="line_items">
 													<td>
 														<div class="col-10">
 															<input type="text" class="form-control" name="nama_barang[]" required autocomplete="off">
@@ -106,7 +106,7 @@
 													</td>
 													<td>
 														<div class="col-10" required>
-															<input type="number" class="form-control" id="quantity" name="quantity[]" required autocomplete="off">
+															<input type="number" class="form-control input_angka quantity" name="quantity[]" required autocomplete="off">
 														</div>
 													</td>
 													<td>
@@ -116,16 +116,15 @@
 													</td>
 													<td>
 														<div class="col-10">
-															<input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" required autocomplete="off">
+															<input type="number" class="form-control input_angka harga_satuan" name="harga_satuan[]" required autocomplete="off">
 														</div>
 													</td>
 													<td>
 														<div class="col-10">
-															<input type="number" class="form-control" id="jumlah" name="jumlah[]" readonly required>
+															<input type="text" class="form-control" id="jumlah" name="jumlah[]" readonly required jAutoCalc="{quantity} * {harga_satuan}">
 														</div>
 													</td>
 													<td class="col-10">
-
 													</td>
 												</tr>
 											</tbody>
@@ -134,7 +133,7 @@
 													<td colspan="5" class="text-right"><b>Total</b></td>
 													<td>
 														<div class="col-10">
-															<input type="number" class="form-control" id="total_harga" name="total_harga" autocomplete="off" required>
+															<input type="text" class="form-control total_harga" id="total_harga" name="total_harga" autocomplete="off" required jAutoCalc="SUM({jumlah})">
 														</div>
 													</td>
 													<td style="display: none;">
@@ -162,21 +161,16 @@
 		<!-- END MAIN CONTENT -->
 	</div>
 	<!-- END MAIN -->
-	
+
 	<script src="{{asset('admin/assets/vendor/jquery/jquery.min.js')}}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script> -->
-	
-	@stop
+@endsection
 
-	@section('footer')
-
+@section('footer')
 	<script type="text/javascript">
 		//toastr
 		@if(session('berhasil'))
-		toastr.success('{{session('berhasil')}}')
+			toastr.success('{{session('berhasil')}}')
 		@endif
 
 		// date
@@ -188,22 +182,13 @@
 			});
 		});
 
-		//operasi perhitungan
-		$('tbody').keyup(function(){
-			var bil1 = parseInt($('#quantity').val());
-			var bil2 = parseInt($('#harga_satuan').val());
-			var jumlah = bil1 * bil2;
-
-			$('#jumlah').attr('value', jumlah);
-		});
-
 		//  tambahBaris
 		$('.tambahBaris').on('click', function() {
 			tambahBaris();
-		}); 
+		});
 
 		function tambahBaris() {
-			var tr = '<tr>'+
+			var tr = '<tr name="line_items">'+
 			'<td>'+
 			'<div class="col-10">'+
 			'<input type="text" class="form-control" name="nama_barang[]" autocomplete="off" required>'+
@@ -216,7 +201,7 @@
 			'</td>'+
 			'<td>'+
 			'<div class="col-10">'+
-			'<input type="number" class="form-control" id="quantity" name="quantity[]" autocomplete="off" required>'+
+			'<input type="number" class="form-control input_angka quantity" name="quantity[]" autocomplete="off" required>'+
 			'</div>'+
 			'</td>'+
 			'<td>'+
@@ -226,12 +211,12 @@
 			'</td>'+
 			'<td>'+
 			'<div class="col-10">'+
-			'<input type="number" class="form-control" id="harga_satuan" name="harga_satuan[]" autocomplete="off" required>'+
+			'<input type="number" class="form-control input_angka harga_satuan" name="harga_satuan[]" autocomplete="off" required>'+
 			'</div>'+
 			'</td>'+
 			'<td>'+
 			'<div class="col-10">'+
-			'<input type="number" class="form-control" id="jumlah" name="jumlah[]" required>'+
+			'<input type="number" class="form-control" id="jumlah" name="jumlah[]" required jAutoCalc="{quantity} * {harga_satuan}">'+
 			'</div>'+
 			'</td>'+
 			'<td>'+
@@ -241,12 +226,29 @@
 			'</tr>';
 
 			$('tbody').append(tr);
+
+			$(document).ready(function() {
+				$('table[name=cart]').jAutoCalc('destroy');
+				$('table[name=cart] tr[name=line_items').jAutoCalc({keyEventsFire: true,emptyAsZero: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
+				$('table[name=cart]').jAutoCalc({decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
+			});
+
+			// $('button[name=remove]').click(function(e){
+			// 	e.preventDefault();
+			// 	$(this).parents('table');
+			// 	$(this).parents('tr').remove();
+			// });
 		};
+
+		$(document).ready(function() {
+				// $('table[name=cart]').jAutoCalc('destroy');
+				$('table[name=cart] tr[name=line_items').jAutoCalc({keyEventsFire: true,emptyAsZero: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
+				$('table[name=cart]').jAutoCalc({decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
+		});
 
 		//hapus baris
 		$(document).on('click','.hapusBaris', function() {
 			$(this).closest('tr').remove();
 		});
 	</script>
-	@endsection
-
+@endsection
