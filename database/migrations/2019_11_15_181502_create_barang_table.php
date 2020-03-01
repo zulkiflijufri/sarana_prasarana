@@ -20,7 +20,7 @@ class CreateBarangTable extends Migration
             $table->integer('quantity');
             $table->string('satuan_barang', 20);
             $table->integer('harga_satuan');
-            $table->string('jumlah',11);
+            $table->integer('jumlah',20);
             $table->string('status', 20)->nullable();
             $table->integer('pengajuan_id')->unsigned();
             $table->timestamps();
