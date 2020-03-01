@@ -36,7 +36,7 @@
 						<td align="center" colspan="4">{{$barang->quantity}}</td>
 						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
 						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
-						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
+						<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
 					</tr>
 				@elseif($barang->status == 'Ya')
 					<tr>
@@ -45,22 +45,13 @@
 						<td align="center" colspan="4">{{$barang->quantity}}</td>
 						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
 						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
-						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
-					</tr>
-				@else
-					<tr>
-						<td align="center">{{$no++}}.</td>
-						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
-						<td align="center" colspan="4">{{$barang->quantity}}</td>
-						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
-						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
-						<td align="center" colspan="4">Rp. {{$barang->jumlah}}</td>
+						<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
 					</tr>
 				@endif
 			<?php endforeach ?>
 			<tr>
 				<td colspan="19" align="right"><b>Total</b></td>
-				<td colspan="4" align="center"><b>Rp. {{$pengajuan->total_harga}}</b></td>
+				<td colspan="4" align="center"><b>Rp. {{number_format($pengajuan->total_harga,0,',','.')}}</b></td>
 			</tr>
 		</tbody>
 	</table>
