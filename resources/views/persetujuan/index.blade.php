@@ -24,9 +24,9 @@
           </tr>
         </thead>
         <tbody>
-          @forelse($pengajuans as $pengajuan)
+          @forelse($pengajuans as $key => $pengajuan)
             <tr>
-              <td>{{$loop->iteration}}</td>
+              <td>{{$pengajuans->firstItem() + $key}}</td>
               <td>{{$pengajuan->nama_pengajuan}} <p class="text-muted" style="font-size: 12px; margin-top: 3px; margin-bottom: 2px;">{{$pengajuan->created_at->diffForHumans()}}</p></td>
               <td>{{$pengajuan->unit}}</td>
               <td>{{$pengajuan->waket_satker}}</td>
@@ -59,8 +59,8 @@
           @endforelse
         </tbody>
       </table>
-      <!-- Link Paginate -->
-      {!! $pengajuans->render() !!}
+    <!-- Link Paginate -->
+    {!! $pengajuans->render() !!}
     </div>
   </div>
 </div>
@@ -79,7 +79,7 @@
   $('.hapus').click(function(){
     var id_pengajuan = $(this).attr('id_pengajuan');
     var nama_pengajuan = $(this).attr('nama_pengajuan');
-    
+
     swal({
       title: "Anda Yakin?",
       text: "Ingin menghapus pengajuan barang dari "+nama_pengajuan+" ??",

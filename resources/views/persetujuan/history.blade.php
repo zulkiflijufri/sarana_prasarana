@@ -25,9 +25,9 @@
               </tr>
             </thead>
             <tbody>
-              @forelse($pengajuans as $pengajuan)
+              @forelse($pengajuans as $key => $pengajuan)
 	              <tr>
-	                <td>{{$loop->iteration}}</td>
+	                <td>{{$pengajuans->firstItem() + $key}}</td>
 	                <td>{{$pengajuan->perihal}}</td>
 	                <td>{{$pengajuan->unit}}</td>
 	                <td>{{$pengajuan->waket_satker}}</td>
