@@ -127,7 +127,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="col-10">
-                                                                <input type="number" class="form-control" id="jumlah" name="jumlah[]" value="{{$barang->jumlah}}" readonly>
+                                                                <input type="number" class="form-control" id="jumlah" name="jumlah[]" value="{{ $barang->jumlah}}" readonly>
                                                             </div>
                                                         </td>
                                                         <td colspan="2">
@@ -151,7 +151,7 @@
                                                     <td colspan="5" class="text-right"><b>Total</b></td>
                                                     <td>
                                                         <div class="col-10">
-                                                            <input type="number" name="total_harga" class="form-control" value="{{$pengajuan->total_harga}}" readonly>
+                                                            <input type="number" name="total_harga" class="form-control" value="{{$barang->pengajuan->total_harga}}" readonly>
                                                         </div>
                                                         <td style="display: none;">
                                                         </td>
