@@ -17,13 +17,10 @@
 					<div class="panel-body">
 						<form action="/pengajuan/create" method="post">
 							{{csrf_field()}}
-							<div class="form-group row"> <!-- {{$errors->has('nama_pengajuan') ? 'has-error' : ''}} -->
+							<div class="form-group row">
 								<label class="col-sm-2 col-form-label">NAMA PENGAJU</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" name="nama_pengajuan" placeholder="Nama Lengkap" autofocus autocomplete="off" required>
-								<!-- 	@if($errors->has('nama_pengajuan'))
-									<span class="help-block">{{$errors->first('nama_pengajuan')}}</span>
-									@endif -->
 								</div>
 							</div>
 							<div class="form-group row">
@@ -162,88 +159,15 @@
 	</div>
 	<!-- END MAIN -->
 
-	<script src="{{asset('admin/assets/vendor/jquery/jquery.min.js')}}"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 @endsection
 
 @section('footer')
 	<script type="text/javascript">
-		//toastr
 		@if(session('berhasil'))
 			toastr.success('{{session('berhasil')}}')
 		@endif
-
-		// date
-		$(function(){
-			$(".datepicker").datepicker({
-				dateFormat: "dd-MM-yy",
-				minDate: 0,
-				maxDate: "+1M +5D"
-			});
-		});
-
-		$(document).ready(function() {
-				//$('table[name=cart]').jAutoCalc('destroy');
-				$('table[name=cart] tr[name=line_items').jAutoCalc({keyEventsFire: true,emptyAsZero: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
-				$('table[name=cart]').jAutoCalc({keyEventsFire: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
-		});
-
-		//  tambahBaris
-		$('.tambahBaris').on('click', function() {
-			tambahBaris();
-		});
-
-		function tambahBaris() {
-			var tr = '<tr name="line_items">'+
-			'<td>'+
-			'<div class="col-10">'+
-			'<input type="text" class="form-control" name="nama_barang[]" autocomplete="off" required>'+
-			'</div>'+
-			'</td>'+
-			'<td>'+
-			'<div class="col-10">'+
-			'<input type="text" class="form-control" name="link_gambar[]" autocomplete="off" required>'+
-			'</div>'+
-			'</td>'+
-			'<td>'+
-			'<div class="col-10">'+
-			'<input type="number" class="form-control input_angka quantity" name="quantity[]" autocomplete="off" required>'+
-			'</div>'+
-			'</td>'+
-			'<td>'+
-			'<div class="col-10">'+
-			'<input type="text" class="form-control" name="satuan_barang[]" autocomplete="off" required>'+
-			'</div>'+
-			'</td>'+
-			'<td>'+
-			'<div class="col-10">'+
-			'<input type="number" class="form-control input_angka harga_satuan" name="harga_satuan[]" autocomplete="off" required>'+
-			'</div>'+
-			'</td>'+
-			'<td>'+
-			'<div class="col-10">'+
-			'<input type="text" class="form-control" id="jumlah" name="jumlah[]" required jAutoCalc="{quantity} * {harga_satuan}">'+
-			'</div>'+
-			'</td>'+
-			'<td>'+
-			'<div class="col-10"><a href="#"><span class="lnr lnr-circle-minus hapusBaris"></span></a>'+
-			'</div>'+
-			'</td>'+
-			'</tr>';
-
-			$('tbody').append(tr);
-
-			$(document).ready(function() {
-				$('table[name=cart]').jAutoCalc('destroy');
-				$('table[name=cart] tr[name=line_items').jAutoCalc({keyEventsFire: true,emptyAsZero: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
-				$('table[name=cart]').jAutoCalc({keyEventsFire: true,decimalOpts: ['.', '.'],thousandOpts: ['.', '.', ' ']});
-			});
-
-		};
-			//hapus baris
-			$(document).on('click','.hapusBaris', function() {
-				$(this).parents('tr').remove();
-			});
-
 	</script>
+
+	<!-- custom js -->
+	<script src="{{asset('js/script.js')}}"></script>
 @endsection
