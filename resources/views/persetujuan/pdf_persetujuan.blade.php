@@ -29,25 +29,34 @@
 		<tbody>
 			<?php $no = 1; ?>
 			<?php foreach ($barangs as $barang) : ?>
-				@if($barang->status == '')
-					<tr>
-						<td align="center">{{$no++}}.</td>
-						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
-						<td align="center" colspan="4">{{$barang->quantity}}</td>
-						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
-						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
-						<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
-					</tr>
-				@elseif($barang->status == 'Ya')
-					<tr>
-						<td align="center">{{$no++}}.</td>
-						<td align="center" colspan="6">{{$barang->nama_barang}}</td>
-						<td align="center" colspan="4">{{$barang->quantity}}</td>
-						<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
-						<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
-						<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
-					</tr>
-				@endif
+			@if($barang->status == '')
+			<tr>
+				<td align="center">{{$no++}}.</td>
+				<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+				<td align="center" colspan="4">{{$barang->quantity}}</td>
+				<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+				<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
+				<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
+			</tr>
+			@elseif($barang->status == 'Ya')
+			<tr>
+				<td align="center">{{$no++}}.</td>
+				<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+				<td align="center" colspan="4">{{$barang->quantity}}</td>
+				<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+				<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
+				<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
+			</tr>
+			@elseif(count($barangs) == count($no_barang))
+			<tr>
+				<td align="center">{{$no++}}.</td>
+				<td align="center" colspan="6">{{$barang->nama_barang}}</td>
+				<td align="center" colspan="4">{{$barang->quantity}}</td>
+				<td align="center" colspan="4">{{$barang->satuan_barang}}</td>
+				<td align="center" colspan="4">Rp. {{number_format($barang->harga_satuan,0,',','.')}}</td>
+				<td align="center" colspan="4">Rp. {{number_format($barang->jumlah,0,',','.')}}</td>
+			</tr>
+			@endif
 			<?php endforeach ?>
 			<tr>
 				<td colspan="19" align="right"><b>Total</b></td>
@@ -88,17 +97,7 @@
 			</td>
 			<td rowspan="11"></td>
 		</tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
-		<tr></tr>
+		<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
 	</table>
 </body>
-
 </html>
