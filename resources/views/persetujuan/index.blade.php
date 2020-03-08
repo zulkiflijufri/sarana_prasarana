@@ -12,7 +12,11 @@
         <h3 class="panel-title">Data Pengajuan</h3>
       </div>
       <div class="panel-body">
-       <table class="table table-hover">
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <i class="fa fa-warning"></i> Perhatian, <b>menghapus persetujuan</b> sama dengan <b>menghapus history pengajuan (.pdf)</b>
+        </div>
+        <table class="table table-hover">
          <thead>
            <tr>
             <th>NO</th>
@@ -25,42 +29,42 @@
         </thead>
         <tbody>
           @forelse($pengajuans as $key => $pengajuan)
-            <tr>
-              <td>{{$pengajuans->firstItem() + $key}}</td>
-              <td>{{$pengajuan->nama_pengajuan}} <p class="text-muted" style="font-size: 12px; margin-top: 3px; margin-bottom: 2px;">{{$pengajuan->created_at->diffForHumans()}}</p></td>
-              <td>{{$pengajuan->unit}}</td>
-              <td>{{$pengajuan->waket_satker}}</td>
-              <td>
-                @if($pengajuan->proses == 'Belum')
-                  <span class="label label-danger">Belum diproses</span>
-                @else
-                  <span class="label label-success">Sudah diproses</span>
-                @endif
-              </td>
-              <td>
-                <a href="/persetujuan/detail/{{$pengajuan->id}}" title="Lihat"><span class="lnr lnr-eye"></span></a>&nbsp;
-                @if($pengajuan->proses == 'Belum')
-                  <a href="#"><span class="lnr lnr-trash hapus" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus" style="margin-left: 10px; opacity: 0.5; pointer-events: none;"></span></a>
-                @else
-                  <a href="#"><span class="lnr lnr-trash hapus" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus" style="margin-left: 10px;"></span></a>
-                @endif
-              </td>
-            </tr>
+          <tr>
+            <td>{{$pengajuans->firstItem() + $key}}</td>
+            <td>{{$pengajuan->nama_pengajuan}} <p class="text-muted" style="font-size: 12px; margin-top: 3px; margin-bottom: 2px;">{{$pengajuan->created_at->diffForHumans()}}</p></td>
+            <td>{{$pengajuan->unit}}</td>
+            <td>{{$pengajuan->waket_satker}}</td>
+            <td>
+              @if($pengajuan->proses == 'Belum')
+              <span class="label label-danger">Belum diproses</span>
+              @else
+              <span class="label label-success">Sudah diproses</span>
+              @endif
+            </td>
+            <td>
+              <a href="/persetujuan/detail/{{$pengajuan->id}}" title="Lihat"><span class="lnr lnr-eye"></span></a>&nbsp;
+              @if($pengajuan->proses == 'Belum')
+              <a href="#"><span class="lnr lnr-trash hapus" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus" style="margin-left: 10px; opacity: 0.5; pointer-events: none;"></span></a>
+              @else
+              <a href="#"><span class="lnr lnr-trash hapus" nama_pengajuan="{{$pengajuan->nama_pengajuan}}" id_pengajuan="{{$pengajuan->id}}" title="Hapus" style="margin-left: 10px;"></span></a>
+              @endif
+            </td>
+          </tr>
           @empty
-            @if(request()->get('hasil') == '')
-              <tr>
-                <td colspan="5" align="center"><i>- Data pengajuan tidak ditemukan -</i></td>
-              </tr>
-            @else
-              <tr>
-                <td colspan="5" align="center"><i>- Data pengajuan masih kosong -</i></td>
-              </tr>
-            @endif
+          @if(request()->get('hasil') == '')
+          <tr>
+            <td colspan="5" align="center"><i>- Data pengajuan tidak ditemukan -</i></td>
+          </tr>
+          @else
+          <tr>
+            <td colspan="5" align="center"><i>- Data pengajuan masih kosong -</i></td>
+          </tr>
+          @endif
           @endforelse
         </tbody>
       </table>
-    <!-- Link Paginate -->
-    {!! $pengajuans->render() !!}
+      <!-- Link Paginate -->
+      {!! $pengajuans->render() !!}
     </div>
   </div>
 </div>
@@ -71,9 +75,9 @@
 
 <script type="text/javascript">
   @if(session('proses'))
-    toastr.info('{{session('proses')}}')
+  toastr.info('{{session('proses')}}')
   @elseif(session('hapus'))
-    toastr.warning('{{session('hapus')}}')
+  toastr.warning('{{session('hapus')}}')
   @endif
 
   $('.hapus').click(function(){
