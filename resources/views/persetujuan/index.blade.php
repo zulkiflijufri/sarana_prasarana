@@ -16,7 +16,8 @@
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
           <i class="fa fa-warning"></i> Perhatian, <b>menghapus persetujuan</b> sama dengan <b>menghapus history pengajuan (.pdf)</b>
         </div>
-        <table class="table table-hover">
+        <div class="table-responsive">
+            <table class="table table-hover">
          <thead>
            <tr>
             <th>NO</th>
@@ -62,7 +63,8 @@
           @endif
           @endforelse
         </tbody>
-      </table>
+        </table>
+        </div>
       <!-- Link Paginate -->
       {!! $pengajuans->render() !!}
     </div>

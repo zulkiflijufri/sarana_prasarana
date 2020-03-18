@@ -12,7 +12,8 @@
             <h3 class="panel-title">History Pengajuan</h3>
           </div>
           <div class="panel-body">
-           <table class="table table-hover">
+           <div class="table-responsive">
+             <table class="table table-hover">
              <thead>
                <tr>
                 <th>NO</th>
@@ -26,12 +27,12 @@
             </thead>
             <tbody>
               @forelse($pengajuans as $key => $pengajuan)
-	              <tr>
-	                <td>{{$pengajuans->firstItem() + $key}}</td>
-	                <td>{{$pengajuan->perihal}}</td>
-	                <td>{{$pengajuan->unit}}</td>
-	                <td>{{$pengajuan->waket_satker}}</td>
-	                <td>{{$pengajuan->tanggal}}</td>
+                <tr>
+                  <td>{{$pengajuans->firstItem() + $key}}</td>
+                  <td>{{$pengajuan->perihal}}</td>
+                  <td>{{$pengajuan->unit}}</td>
+                  <td>{{$pengajuan->waket_satker}}</td>
+                  <td>{{$pengajuan->tanggal}}</td>
                   <td>
                     @if($pengajuan->proses == 'Belum')
                       <span class="label label-danger">Belum diproses</span>
@@ -39,31 +40,32 @@
                       <span class="label label-success">Sudah diproses</span>
                     @endif
                   </td>
-	                <td>
+                  <td>
                     @if(auth()->user()->role == 'pengajuan')
                         <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
                     @else
-                    	@if($pengajuan->proses == 'Belum')
-                      		<a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf" style="pointer-events:none; opacity: 0.6"><span class="lnr lnr-cloud-download"></span></a>
-                      	@else
-                        	<a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
-                      	@endif
+                      @if($pengajuan->proses == 'Belum')
+                          <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf" style="pointer-events:none; opacity: 0.6"><span class="lnr lnr-cloud-download"></span></a>
+                        @else
+                          <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
+                        @endif
                     @endif
                   </td>
-	              </tr>
+                </tr>
               @empty
                 @if(request()->get('cari') == '')
                   <tr>
                     <td colspan="6" align="center"><i> - History pengajuan tidak ditemukan -</i></td>
                   </tr>
                 @else
-  	              <tr>
-  	                <td colspan="6" align="center"><i> - History pengajuan masih kosong -</i></td>
-  	              </tr>
+                  <tr>
+                    <td colspan="6" align="center"><i> - History pengajuan masih kosong -</i></td>
+                  </tr>
                 @endif
               @endforelse
             </tbody>
-          </table>
+           </table>
+           </div>
           <!-- Link Paginate -->
           {!! $pengajuans->render() !!}
         </div>
