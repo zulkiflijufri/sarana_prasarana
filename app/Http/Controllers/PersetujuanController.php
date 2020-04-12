@@ -16,7 +16,7 @@ class PersetujuanController extends Controller
                           ->orWhere('unit', 'LIKE', '%' . $request->cari . '%')->orWhere('waket_satker','LIKE','%' . $request->cari . '%')
                           ->simplePaginate(5);
         } else {
-            $pengajuans = Pengajuan::simplePaginate(5);
+            $pengajuans = Pengajuan::orderBy('created_at','DESC')->simplePaginate(5);
         }
         return view('persetujuan.index', compact('pengajuans'));
     }
@@ -38,27 +38,37 @@ class PersetujuanController extends Controller
 
     public function proses(Request $request, $id)
     {
-        $status = $request->status;
         $nama_barang = $request->nama_barang;
-        $barang = Barang::where('pengajuan_id', $id)->get();
-
-        for ($i = 0; $i < count($nama_barang); $i++) {
-            Barang::where([
-                ['id', '=', $barang[$i]->id],
-                ['nama_barang', '=', $barang[$i]->nama_barang],
-                ['pengajuan_id', '=', $barang[0]->pengajuan_id]
-            ])->update([
-                'status' => $status[$i]
+        if (auth()->user()->role == 'admin') {
+            if (count($nama_barang) > 0) {
+                foreach ($nama_barang as $key => $value) {
+                    $barang2 = [
+                        'harga_satuan' => $request->harga_satuan[$key],
+                        'jumlah' => $request->jumlah[$key],
+                    ];
+                    Barang::where('pengajuan_id', $id)->update($barang2);
+                }
+            }
+            Pengajuan::where('id', $id)->update([
+                'proses' => 'Proses',
+                'total_harga' => $request->total_harga
             ]);
+            return redirect('/persetujuan')->with('proses', 'Pengajuan Sementara Di Proses');
+        } else {
+             if (count($nama_barang) > 0) {
+                foreach ($nama_barang as $key => $value) {
+                    $barang2 = [
+                        'status' => $request->status[$key],
+                    ];
+                    Barang::where('nama_barang', $nama_barang[$key])->update($barang2);
+                }
+            }
+            Pengajuan::where('id', $id)->update([
+                'proses' => 'Selesai',
+                'catatan' => $request->catatan
+            ]);
+            return redirect('/persetujuan')->with('proses', 'Pengajuan Berhasil Di Proses');
         }
-
-        $catatan = $request->catatan;
-        Pengajuan::where('id', $id)->update([
-            'catatan' => $catatan,
-            'proses' => 'Selesai'
-        ]);
-
-        return redirect('/persetujuan')->with('proses', 'Pengajuan Berhasil Di Proses');
     }
 
     public function history(Request $request)
@@ -69,7 +79,7 @@ class PersetujuanController extends Controller
                         ->orWhere('tanggal', 'LIKE', '%' . $request->cari . '%')
                         ->simplePaginate(8);
         } else {
-            $pengajuans = Pengajuan::simplePaginate(5);
+            $pengajuans = Pengajuan::orderBy('created_at', 'DESC')->simplePaginate(5);
         }
         return view('persetujuan.history', ['pengajuans' => $pengajuans]);
     }
@@ -81,6 +91,10 @@ class PersetujuanController extends Controller
         $no_barang = Barang::where('pengajuan_id', $id)->whereIn('status', ['Tidak'])->get();
         $acc_barang = Barang::where('pengajuan_id', $id)->whereIn('status', ['Ya'])->get();
         $pdf = PDF::loadview('persetujuan.pdf_persetujuan', compact('pengajuan', 'barangs', 'acc_barang', 'no_barang'));
+
+        if ($pengajuan->proses != 'Selesai') {
+            return redirect()->back();
+        }
         return $pdf->stream('Pengajuan Barang_' . $pengajuan->nama_pengajuan . '.pdf');
     }
 }

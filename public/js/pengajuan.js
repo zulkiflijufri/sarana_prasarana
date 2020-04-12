@@ -41,16 +41,6 @@
 			'</div>'+
 			'</td>'+
 			'<td>'+
-			'<div class="col-10">'+
-			'<input type="number" class="form-control input_angka harga_satuan" name="harga_satuan[]" autocomplete="off" required>'+
-			'</div>'+
-			'</td>'+
-			'<td>'+
-			'<div class="col-10">'+
-			'<input type="text" class="form-control" id="jumlah" name="jumlah[]" required jAutoCalc="{quantity} * {harga_satuan}">'+
-			'</div>'+
-			'</td>'+
-			'<td>'+
 			'<div class="col-10"><a href="#"><span class="lnr lnr-circle-minus hapusBaris"></span></a>'+
 			'</div>'+
 			'</td>'+

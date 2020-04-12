@@ -34,21 +34,17 @@
                   <td>{{$pengajuan->waket_satker}}</td>
                   <td>{{$pengajuan->tanggal}}</td>
                   <td>
-                    @if($pengajuan->proses == 'Belum')
+                    @if(($pengajuan->proses == 'Belum') || ($pengajuan->proses == 'Proses'))
                       <span class="label label-danger">Belum diproses</span>
                     @else
                       <span class="label label-success">Sudah diproses</span>
                     @endif
                   </td>
                   <td>
-                    @if(auth()->user()->role == 'pengajuan')
-                        <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
-                    @else
-                      @if($pengajuan->proses == 'Belum')
+                      @if(($pengajuan->proses == 'Belum') || ($pengajuan->proses == 'Proses'))
                           <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf" style="pointer-events:none; opacity: 0.6"><span class="lnr lnr-cloud-download"></span></a>
                         @else
                           <a href="pdf_persetujuan/{{$pengajuan->id}}" title="Download pdf"><span class="lnr lnr-cloud-download"></span></a>
-                        @endif
                     @endif
                   </td>
                 </tr>

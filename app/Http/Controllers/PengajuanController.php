@@ -24,8 +24,6 @@ class PengajuanController extends Controller
                     'link_gambar' => $request->link_gambar[$barang],
                     'quantity' => $request->quantity[$barang],
                     'satuan_barang' => $request->satuan_barang[$barang],
-                    'harga_satuan' => $request->harga_satuan[$barang],
-                    'jumlah' => $request->jumlah[$barang],
                     'pengajuan_id' => $id_pengajuan,
                 ];
 

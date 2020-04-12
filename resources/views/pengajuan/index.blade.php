@@ -84,9 +84,12 @@
 													<th>Link & Gambar</th>
 													<th>Quantity</th>
 													<th>Satuan Barang</th>
+													{{-- <th></th> --}}
+													@if(auth()->user()->role == 'admin')
 													<th>Harga Satuan</th>
 													<th>Jumlah</th>
 													<th></th>
+													@endif
 												</tr>
 											</thead>
 											<tbody>
@@ -111,6 +114,7 @@
 															<input type="text" class="form-control" name="satuan_barang[]" required autocomplete="off">
 														</div>
 													</td>
+													@if(auth()->user()->role == 'admin')
 													<td>
 														<div class="col-10">
 															<input type="number" class="form-control input_angka harga_satuan" name="harga_satuan[]" required autocomplete="off">
@@ -118,7 +122,7 @@
 													</td>
 													<td>
 														<div class="col-10">
-															<input type="text" class="form-control" id="jumlah" name="jumlah[]" readonly required jAutoCalc="{quantity} * {harga_satuan}">
+															<input type="text" class="form-control" id="jumlah" name="jumlah[]" required jAutoCalc="{quantity} * {harga_satuan}">
 														</div>
 													</td>
 													<td class="col-10">
@@ -135,6 +139,7 @@
 													</td>
 													<td style="display: none;">
 													</td>
+													@endif
 												</tr>
 											</tfoot>
 										</table>
@@ -158,7 +163,6 @@
 		<!-- END MAIN CONTENT -->
 	</div>
 	<!-- END MAIN -->
-
 @endsection
 
 @section('footer')
@@ -168,6 +172,9 @@
 		@endif
 	</script>
 
-	<!-- custom js -->
-	<script src="{{asset('js/script.js')}}"></script>
+	@if(auth()->user()->role == 'pengajuan')
+		<script src="{{asset('js/pengajuan.js')}}"></script>
+	@elseif(auth()->user()->role == 'admin')
+		<script src="{{asset('js/admin.js')}}"></script>
+	@endif
 @endsection
