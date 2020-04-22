@@ -198,21 +198,33 @@
 									</div>
 								</div>
 							</div>
-							@if(auth()->user()->role == 'atasan')
+							@if((auth()->user()->role == 'atasan') && ($pengajuan->proses == 'Selesai'))
 							<div class="form-group row">
 								<label class="col-sm-2 col-form-label">CATATAN</label>
 								<div class="col-sm-10">
-									@if($pengajuan->catatan != null)
+									@if (($pengajuan->catatan != null) || ($pengajuan->catatan == null))
 									<textarea class="form-control" rows="3" name="catatan" disabled>{{$pengajuan->catatan}}</textarea>
-									@else
-									<textarea class="form-control" rows="3" name="catatan" placeholder="(Opsional)"></textarea>
 									@endif
 								</div>
 							</div>
 							<br><br>
+							@elseif ((auth()->user()->role == 'atasan') && ($pengajuan->proses == 'Proses'))
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label">CATATAN</label>
+								<div class="col-sm-10">
+									<textarea class="form-control" rows="3" name="catatan"></textarea>
+								</div>
+							</div>
 							@else
-								@if($pengajuan->catatan != null)
+								@if(($pengajuan->proses == 'Selesai') && ($pengajuan->catatan != null))
 									<div class="form-group row">
+									<label class="col-sm-2 col-form-label">CATATAN</label>
+									<div class="col-sm-10">
+										<textarea class="form-control" rows="3" name="catatan" disabled>{{$pengajuan->catatan}}</textarea>
+									</div>
+									</div>
+								@elseif($pengajuan->proses == 'Selesai')
+								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">CATATAN</label>
 									<div class="col-sm-10">
 										<textarea class="form-control" rows="3" name="catatan" disabled>{{$pengajuan->catatan}}</textarea>

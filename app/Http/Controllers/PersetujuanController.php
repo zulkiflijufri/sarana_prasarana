@@ -13,10 +13,10 @@ class PersetujuanController extends Controller
     {
         if ($request->has('cari')) {
             $pengajuans = Pengajuan::where('nama_pengajuan', 'LIKE', '%' . $request->cari . '%')
-                          ->orWhere('unit', 'LIKE', '%' . $request->cari . '%')->orWhere('waket_satker','LIKE','%' . $request->cari . '%')
-                          ->simplePaginate(5);
+                ->orWhere('unit', 'LIKE', '%' . $request->cari . '%')->orWhere('waket_satker', 'LIKE', '%' . $request->cari . '%')
+                ->simplePaginate(5);
         } else {
-            $pengajuans = Pengajuan::orderBy('created_at','DESC')->simplePaginate(5);
+            $pengajuans = Pengajuan::orderBy('created_at', 'DESC')->simplePaginate(5);
         }
         return view('persetujuan.index', compact('pengajuans'));
     }
@@ -40,14 +40,11 @@ class PersetujuanController extends Controller
     {
         $nama_barang = $request->nama_barang;
         if (auth()->user()->role == 'admin') {
-            if (count($nama_barang) > 0) {
-                foreach ($nama_barang as $key => $value) {
-                    $barang2 = [
-                        'harga_satuan' => $request->harga_satuan[$key],
-                        'jumlah' => $request->jumlah[$key],
-                    ];
-                    Barang::where('pengajuan_id', $id)->update($barang2);
-                }
+            for ($i = 0; $i < count($nama_barang); $i++) {
+                Barang::where('nama_barang', $nama_barang[$i])->update([
+                    'harga_satuan' => $request->harga_satuan[$i],
+                    'jumlah' => $request->jumlah[$i]
+                ]);
             }
             Pengajuan::where('id', $id)->update([
                 'proses' => 'Proses',
@@ -55,29 +52,26 @@ class PersetujuanController extends Controller
             ]);
             return redirect('/persetujuan')->with('proses', 'Pengajuan Sementara Di Proses');
         } else {
-             if (count($nama_barang) > 0) {
-                foreach ($nama_barang as $key => $value) {
-                    $barang2 = [
-                        'status' => $request->status[$key],
-                    ];
-                    Barang::where('nama_barang', $nama_barang[$key])->update($barang2);
-                }
+            for ($i = 0; $i < count($nama_barang); $i++) {
+                Barang::where('nama_barang', $nama_barang[$i])->update([
+                    'status' => $request->status[$i]
+                ]);
             }
-            Pengajuan::where('id', $id)->update([
-                'proses' => 'Selesai',
-                'catatan' => $request->catatan
-            ]);
-            return redirect('/persetujuan')->with('proses', 'Pengajuan Berhasil Di Proses');
         }
+        Pengajuan::where('id', $id)->update([
+            'proses' => 'Selesai',
+            'catatan' => $request->catatan
+        ]);
+        return redirect('/persetujuan')->with('proses', 'Pengajuan Berhasil Di Proses');
     }
 
     public function history(Request $request)
     {
         if ($request->has('cari')) {
             $pengajuans = Pengajuan::where('perihal', 'LIKE', '%' . $request->cari . '%')
-                        ->orWhere('unit', 'LIKE', '%' . $request->cari . '%')->orWhere('waket_satker','LIKE','%' . $request->cari . '%')
-                        ->orWhere('tanggal', 'LIKE', '%' . $request->cari . '%')
-                        ->simplePaginate(8);
+                ->orWhere('unit', 'LIKE', '%' . $request->cari . '%')->orWhere('waket_satker', 'LIKE', '%' . $request->cari . '%')
+                ->orWhere('tanggal', 'LIKE', '%' . $request->cari . '%')
+                ->simplePaginate(8);
         } else {
             $pengajuans = Pengajuan::orderBy('created_at', 'DESC')->simplePaginate(5);
         }

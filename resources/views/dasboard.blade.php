@@ -33,7 +33,6 @@
 					</div>
 				</div>
 				<!-- End Row 1 -->
-
 				<!-- Row 2 -->
 				<div class="row">
 					<div class="col-md-3">
